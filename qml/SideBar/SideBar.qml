@@ -7,52 +7,43 @@ import "../SideBar"
 PanelWindow {
     id: sidebar
     required property string side
-
+    WlrLayershell.namespace: "border-" + side
     WlrLayershell.layer: WlrLayershell.Layer.Bottom
     aboveWindows: false
     color: "transparent"
-
     anchors {
         top: true
         bottom: true
         left: side == "left"
         right: side == "right"
     }
-
+    Component.onCompleted: {
+        Quickshell.execDetached(["hyprctl", "keyword", "bezier", "Linear,0,0,1,1"])
+        Quickshell.execDetached(["hyprctl", "keyword", "animation", "windows,1,5,Linear"])
+        Quickshell.execDetached(["hyprctl", "keyword", "animation", "windowsMove,1,5,Linear"])
+        Quickshell.execDetached(["hyprctl", "keyword", "animation", "layers,1,5,Linear"])
+    }
     property int targetZone: side == "left"
         ? (SideBarState.leftOpen ? SideBarState.leftWidth : 45)
         : (SideBarState.rightOpen ? SideBarState.rightWidth : 0)
 
-    property int sidebarWidth: targetZone
+property real animatedZone: targetZone
 
-    exclusiveZone: sidebarWidth
-    implicitWidth: sidebarWidth
 
-    onTargetZoneChanged: anim.restart()
-
-    Component.onCompleted: {
-        sidebarWidth = targetZone
-    }
-
+Behavior on animatedZone {
     NumberAnimation {
-        id: anim
-        target: sidebar
-        property: "sidebarWidth"
-        from: sidebar.sidebarWidth
-        to: sidebar.targetZone
-       duration: 30
+        duration: 500
+        easing.type: Easing.Linear
     }
-
-    mask: Region { item: content }
-
+}
+    implicitWidth: side == "left" ? SideBarState.leftWidth : SideBarState.rightWidth
+exclusiveZone: animatedZone
     Rectangle {
-        id: content
         anchors.top: parent.top
         anchors.bottom: parent.bottom
-        anchors.left: sidebar.side == "left" ? parent.left : undefined
-        anchors.right: sidebar.side == "right" ? parent.right : undefined
-
+        anchors.left: side == "left" ? parent.left : undefined
+        anchors.right: side == "right" ? parent.right : undefined
+        implicitWidth: sidebar.animatedZone
         color: "#2b2622"
-        width: sidebar.sidebarWidth
     }
 }

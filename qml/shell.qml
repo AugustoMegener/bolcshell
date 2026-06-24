@@ -4,18 +4,13 @@ import QtQuick
 import "./TopBar"
 import "./Border"
 import "./SideBar"
+import "./KeyboardRgb"
 
 ShellRoot { 
     id: root 
 
-    SideBar {
-      side: "left" 
-    }
-    SideBar {
-      side: "right" 
-    }
-    TopBar { }
-
+SideBar { side: "right" }
+SideBar { side: "left" }
 
     Variants {
         model: Quickshell.screens
@@ -26,4 +21,7 @@ ShellRoot {
             }
         }
     }
+KeyboardRgb {}
+
+    TopBar { }
 }

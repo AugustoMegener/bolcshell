@@ -26,7 +26,10 @@ Scope {
     anchors { top: true; bottom: true; left: true; right: true }
 
     mask: Region {}
-
+Component.onCompleted: {
+    Quickshell.execDetached(["hyprctl", "keyword", "layerrule[noanim_border]:no_anim on"])
+    Quickshell.execDetached(["hyprctl", "keyword", "layerrule[noanim_border]:match:namespace border"])
+}
     ShaderEffect {
       anchors.fill: parent
       enabled: false
