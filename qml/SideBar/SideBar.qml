@@ -19,9 +19,9 @@ PanelWindow {
     }
     Component.onCompleted: {
         Quickshell.execDetached(["hyprctl", "keyword", "bezier", "Linear,0,0,1,1"])
-        Quickshell.execDetached(["hyprctl", "keyword", "animation", "windows,1,5,Linear"])
-        Quickshell.execDetached(["hyprctl", "keyword", "animation", "windowsMove,1,5,Linear"])
-        Quickshell.execDetached(["hyprctl", "keyword", "animation", "layers,1,5,Linear"])
+        Quickshell.execDetached(["hyprctl", "keyword", "animation", "windows,0,0,Linear"])
+        Quickshell.execDetached(["hyprctl", "keyword", "animation", "windowsMove,0,0,Linear"])
+        Quickshell.execDetached(["hyprctl", "keyword", "animation", "layers,0,0,Linear"])
     }
     property int targetZone: side == "left"
         ? (SideBarState.leftOpen ? SideBarState.leftWidth : 45)
@@ -30,12 +30,6 @@ PanelWindow {
 property real animatedZone: targetZone
 
 
-Behavior on animatedZone {
-    NumberAnimation {
-        duration: 500
-        easing.type: Easing.Linear
-    }
-}
     implicitWidth: side == "left" ? SideBarState.leftWidth : SideBarState.rightWidth
 exclusiveZone: animatedZone
     Rectangle {

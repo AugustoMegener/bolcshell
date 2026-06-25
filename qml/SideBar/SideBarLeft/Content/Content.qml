@@ -8,8 +8,6 @@ ColumnLayout {
   Layout.fillHeight: true
   visible: SideBarState.leftOpen
 
-  TmuxSessionManager {}
-
   Item {
     Layout.fillHeight: true
   }

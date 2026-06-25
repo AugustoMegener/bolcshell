@@ -19,7 +19,10 @@ Repeater {
 
     required property int index
     required property HyprlandWorkspace modelData
-    readonly property bool isFocused: workspace.modelData.focused 
+    readonly property bool isFocused: workspace.modelData.focused
+    readonly property bool isUrgent: workspace.modelData.urgent
+
+    property bool blink: false
 
 
     width: 33
@@ -55,10 +58,17 @@ Repeater {
         anchors.centerIn: parent
       }
 
+      Timer {
+        interval: 450; 
+        running: true; 
+        repeat: true
+        onTriggered: workspace.blink = !workspace.blink      
+      }
+
       ColorOverlay { 
         anchors.fill: icon
         source: icon
-        color: workspace.isFocused? Theme.altColor(workspace.index) : Theme.dim
+        color: workspace.isFocused || (workspace.isUrgent && workspace.blink)? Theme.altColor(workspace.index) : Theme.dim
       }
 
       MouseArea {

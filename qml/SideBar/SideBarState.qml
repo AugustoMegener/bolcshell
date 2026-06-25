@@ -7,4 +7,5 @@ Singleton {
     property int rightWidth: 300
     property bool leftOpen: false
     property bool rightOpen: false
+property bool clickLock: false
 }  

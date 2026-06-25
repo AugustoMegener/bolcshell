@@ -19,13 +19,13 @@ ShellRoot {
       anchors.top: parent.top
 
       anchors.topMargin: 15
-      anchors.rightMargin: 10
       anchors.bottomMargin: 10
       implicitWidth: 50
       implicitHeight: 30
       SideBarToggle {
         anchors.centerIn: parent
-        side: "left"
+        side: "right"
+        visible: SideBarState.rightOpen
       }
     }
   }
