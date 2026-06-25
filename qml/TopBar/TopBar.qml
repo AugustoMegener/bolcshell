@@ -19,8 +19,8 @@ Component.onCompleted: {
     Quickshell.execDetached(["hyprctl", "keyword", "bezier", "Linear,0,0,1,1"])
     Quickshell.execDetached(["hyprctl", "keyword", "animation", "windows,1,5,Linear"])
     Quickshell.execDetached(["hyprctl", "keyword", "animation", "windowsMove,1,5,Linear"])
-    Quickshell.execDetached(["hyprctl", "keyword", "layerrule[noanim_" + side + "]:no_anim on"])
-    Quickshell.execDetached(["hyprctl", "keyword", "layerrule[noanim_" + side + "]:match:namespace border-" + side])
+    Quickshell.execDetached(["hyprctl", "keyword", "layerrule[noanim_topbar]:no_anim on"])
+    Quickshell.execDetached(["hyprctl", "keyword", "layerrule[noanim_topbar]:match:namespace topbar"])
 }
 
     Rectangle {

@@ -1,6 +1,6 @@
-import QtQuick
+
 import "../../Theme"
-import "../"
+import "../SideBar"
 
 Item {
   id: sideBarToggle
@@ -61,9 +61,8 @@ Item {
     anchors.fill: toggleIcon
     onClicked: {
 
-      if (side == "left") SideBarState.leftOpen = !SideBarState.leftOpen
-      else if (side == "right") SideBarState.rightOpen = !SideBarState.rightOpen
-
+    if (side == "left") SideBarState.leftOpen = 
+    else if (side == "right") SideBarState.rightOpen
     } 
     z: 2
 
