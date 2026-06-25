@@ -7,16 +7,8 @@ import "./Theme"
 Item {
     id: root
 
-    readonly property HyprlandWorkspace focusedWorkspace: {
-        for (var i = 0; i < Hyprland.workspaces.values.length; i++) {
-            if (Hyprland.workspaces.values[i].focused) return Hyprland.workspaces.values[i]
-        }
-        return null
-    }
 
-    readonly property color activeColor: focusedWorkspace
-        ? Theme.altColor(focusedWorkspace.id - 1)
-        : "#ffffff"
+    readonly property color activeColor: Theme.activeAltColor
 
     onActiveColorChanged: {
         var r = Math.round(activeColor.g * 255).toString(16).padStart(2, '0')

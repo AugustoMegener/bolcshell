@@ -1,6 +1,7 @@
 import Quickshell
 import Quickshell.Wayland
 import QtQuick
+
 import "../Theme"
 import "../SideBar"
 
@@ -24,7 +25,7 @@ PanelWindow {
         Quickshell.execDetached(["hyprctl", "keyword", "animation", "layers,0,0,Linear"])
     }
     property int targetZone: side == "left"
-        ? (SideBarState.leftOpen ? SideBarState.leftWidth : 45)
+        ? (SideBarState.leftOpen ? SideBarState.leftWidth : 52)
         : (SideBarState.rightOpen ? SideBarState.rightWidth : 0)
 
 property real animatedZone: targetZone

@@ -7,9 +7,13 @@ import "./SideBar"
 import "./KeyboardRgb"
 import "./SideBar/SideBarLeft"
 import "./SideBar/SideBarToggle"
+import "./Components/PowerMenu/"
 
 ShellRoot { 
   id: root 
+
+  PowerMenuShortcut {} 
+  PowerMenu {} 
 
   SideBar { 
     side: "right" 
