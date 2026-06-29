@@ -42,16 +42,16 @@ Item {
     scale: 0.7
   }
 
-MouseArea {
-  anchors.fill: toggleIcon
-  z: 2
-  enabled: visible
-  onPressed: {
-    if (SideBarState.clickLock) return
-    SideBarState.clickLock = true
-    Qt.callLater(function() { SideBarState.clickLock = false })
-    if (sideBarToggle.side == "left") SideBarState.leftOpen = !SideBarState.leftOpen
-    else if (sideBarToggle.side == "right") SideBarState.rightOpen = !SideBarState.rightOpen
+  MouseArea {
+    anchors.fill: toggleIcon
+    z: 2
+    enabled: visible
+    onPressed: {
+      if (SideBarState.clickLock) return
+      SideBarState.clickLock = true
+      Qt.callLater(function() { SideBarState.clickLock = false })
+      if (sideBarToggle.side == "left") SideBarState.leftOpen = !SideBarState.leftOpen
+      else if (sideBarToggle.side == "right") SideBarState.rightOpen = !SideBarState.rightOpen
+    }
   }
-}
 }

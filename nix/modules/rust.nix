@@ -19,7 +19,10 @@
           exec ${qs}/bin/quickshell -p ${./../../qml}
         ''}";
       };
-      rust-project.crates."primary-shell".crane.args = { };
+      rust-project.crates."primary-shell".crane.args = {
+        nativeBuildInputs = [ pkgs.pkg-config ];
+        buildInputs = [ pkgs.openssl ];
+      };
       packages.default = self'.packages.primary-shell;
     };
 }

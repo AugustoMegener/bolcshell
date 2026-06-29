@@ -1,3 +1,4 @@
+//@ pragma UseQApplication
 pragma ComponentBehavior: Bound
 import Quickshell
 import QtQuick
@@ -8,14 +9,17 @@ import "./KeyboardRgb"
 import "./SideBar/SideBarLeft"
 import "./SideBar/SideBarToggle"
 import "./Components/PowerMenu/"
+import "./Components/TrayList/"
 
 ShellRoot { 
   id: root 
+  
 
   PowerMenuShortcut {} 
   PowerMenu {} 
 
   SideBar { 
+    id: sidebar
     side: "right" 
 
     Item {
@@ -32,6 +36,15 @@ ShellRoot {
         visible: SideBarState.rightOpen
       }
     }
+    Column {
+      width: parent.width
+      anchors.top: parent.top
+      anchors.left: parent.left
+      anchors.right: parent.right
+
+
+    }
+
   }
 
   SideBarLeft {}

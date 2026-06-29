@@ -94,7 +94,8 @@
         "nixpkgs": "nixpkgs",
         "quickshell": "quickshell",
         "rust-flake": "rust-flake",
-        "systems": "systems"
+        "systems": "systems",
+        "xkb-monitor": "xkb-monitor"
       }
     },
     "rust-flake": {
@@ -152,6 +153,22 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
+        "type": "github"
+      }
+    },
+    "xkb-monitor": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1770078029,
+        "narHash": "sha256-+7r/1/TFJ8cwV/+zstbFESVv58VnOBCAn8IOwy+snEI=",
+        "owner": "drougas",
+        "repo": "xkb-monitor",
+        "rev": "42f21409c0fee10fa268646a926114a263fb34b4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "drougas",
+        "repo": "xkb-monitor",
         "type": "github"
       }
     }

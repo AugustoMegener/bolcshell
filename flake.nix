@@ -14,6 +14,10 @@
       url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    xkb-monitor = {
+      url = "github:drougas/xkb-monitor";
+      flake = false;
+    };
   };
 
   outputs = inputs:

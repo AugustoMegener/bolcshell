@@ -4,21 +4,28 @@ import Quickshell.Hyprland
 import QtQuick
 
 QtObject {
+    readonly property color colorPurple: "#4b4db8"
+    readonly property color colorYellow: "#da9a22"
+    readonly property color colorRed: "#f25146"
+    readonly property color colorBlue: "#4396b7"
+    readonly property color colorGreen: "#108454"
+
     readonly property color transparent: "#00000000"
     readonly property string innershadowShader: "assets/shaders/innershadow.frag.qsb"
-    readonly property color accent: "#da9a22"
+    readonly property color accent: colorYellow
     readonly property color background: "#2b2622"
     readonly property color foreground: "#302b24"
     readonly property color border: "#3b3026"
     readonly property color dim: "#866f51"
+    readonly property color text: "#d5bfa1"  
     readonly property int fontSize: 14
 
 
 
     property var altColor: function(i) {
-      const colors = ["#da9a22", "#f25146", "#4396b7"]
+      const colors = [colorYellow, colorRed, colorBlue]
       if (i === 0)
-      return "#4b4db8"
+      return colorPurple
       return colors[(i - 1) % 3]
     }
 

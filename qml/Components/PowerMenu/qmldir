@@ -1,3 +1,4 @@
 PowerMenu 1.0 PowerMenu.qml
 PowerMenuShortcut 1.0 PowerMenuShortcut.qml
+PowerMenuToggle 1.0 PowerMenuToggle.qml
 singleton PowerMenuState 1.0 PowerMenuState.qml
