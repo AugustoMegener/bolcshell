@@ -42,11 +42,11 @@ Repeater {
       acceptedButtons: Qt.LeftButton | Qt.RightButton | Qt.MiddleButton
       onClicked: (event) => {
         if (event.button === Qt.RightButton && tray.modelData.hasMenu)
-        menuAnchor.open()
+          menuAnchor.open()
         if (event.button === Qt.LeftButton)
-        tray.modelData.activate()
+          tray.modelData.activate()
         if (event.button === Qt.MiddleButton)
-        tray.modelData.secondaryActivate()
+          tray.modelData.secondaryActivate()
       }
     }
   }

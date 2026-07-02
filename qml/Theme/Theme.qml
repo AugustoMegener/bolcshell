@@ -32,11 +32,11 @@ Component.onCompleted: {
   readonly property color colorGreen: "#108454"
 
 
-  readonly property color colorLightPurple: "#4b4db8"
-  readonly property color colorLightYellow: "#e2bd60"
-  readonly property color colorLightRed: "#f25146"
-  readonly property color colorLightBlue: "#4396b7"
-  readonly property color colorLightGreen: "#108454"
+  readonly property color colorLightPurple: "#707aff"
+  readonly property color colorLightYellow: "#ffbb00"
+  readonly property color colorLightRed: "#f0516c"
+  readonly property color colorLightBlue: "#2ab1c0"
+  readonly property color colorLightGreen: "#4ec68e"
 
 
   readonly property color transparent: "#00000000"
@@ -44,6 +44,7 @@ Component.onCompleted: {
   readonly property color accent: colorYellow
   readonly property color background: "#2b2622"
   readonly property color foreground: "#302b24"
+  readonly property color lightForeground: "#40392d"
   readonly property color border: "#3b3026"
   readonly property color dim: "#866f51"
   readonly property color text: "#d5bfa1"  
@@ -59,7 +60,7 @@ Component.onCompleted: {
 
 
   property var altLightColor: function(i) {
-    const colors = [colorYellow, colorRed, colorBlue]
+    const colors = [colorLightYellow, colorLightRed, colorLightBlue]
     if (i === 0)
     return colorLightPurple
     return colors[(i - 1) % 3]
@@ -73,7 +74,7 @@ Component.onCompleted: {
   }
 
   readonly property color activeAltColor: focusedWorkspace ? Theme.altColor(focusedWorkspace.id - 1) : colorPurple
-  readonly property color activeAltLightColor: focusedWorkspace ? Theme.altColor(focusedWorkspace.id - 1) : colorPurple
+  readonly property color activeAltLightColor: focusedWorkspace ? Theme.altLightColor(focusedWorkspace.id - 1) : colorLightPurple
 
   property var altIcon: function(i) {
     const icons = [ "circle", "triangle", "square"  ]

@@ -8,7 +8,7 @@ import "../SideBar"
 import "../Components/TrayList"
 
 PanelWindow { 
-  id: ba
+  id: topbar
   aboveWindows: false
   WlrLayershell.layer: WlrLayershell.Layer.Bottom
   WlrLayershell.namespace: "topbar"
@@ -36,17 +36,15 @@ PanelWindow {
       width: parent.width - 20
       height: parent.height - 10
 
-
-
       TopBarLeft {
         anchors.left: parent.left
         anchors.verticalCenter: parent.verticalCenter
       }
+
       TopBarRight {
         anchors.right: parent.right
         anchors.verticalCenter: parent.verticalCenter
       }
     }
   }
-
 }

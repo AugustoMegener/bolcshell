@@ -19,6 +19,7 @@ Item {
     implicitWidth: 32
     implicitHeight: 32
     color: parent.hovered? Theme.activeAltColor : Theme.activeAltLightColor
+    opacity: parent.hovered? 1: 0.2
     anchors.centerIn: parent
 
 
@@ -31,6 +32,21 @@ Item {
             easing.type: Easing.InOutQuad
         }
     }
+
+
+    Behavior on opacity {
+        NumberAnimation {
+            duration: 200
+            easing.type: Easing.InOutQuad
+        }
+    }
+
+    Behavior on color {
+        ColorAnimation {
+            duration: 200
+            easing.type: Easing.InOutQuad
+        }
+    }
   }
 
   Image {
@@ -38,6 +54,9 @@ Item {
     id: icon
     anchors.centerIn: parent
     source: "../../assets/icons/" + ( PowerMenuState.isPowerMenuOpen? "sun" : "moon") + ".svg"
+    
+        sourceSize.width: width
+        sourceSize.height: height
   }
 
   ColorOverlay {

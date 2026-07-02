@@ -5,8 +5,7 @@ import "../../SideBarState.qml"
 import "../../../Components/TmuxSessionManager"
 
 ColumnLayout {
-  Layout.fillHeight: true
-  visible: SideBarState.leftOpen
+  Layout.fillWidth: true
 
   Item {
     Layout.fillHeight: true

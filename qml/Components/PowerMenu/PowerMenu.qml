@@ -205,6 +205,7 @@ PanelWindow {
                     backgroundColor: Theme.foreground
                     iconPath: "rotate-ccw.svg"
                     buttonColor: Theme.colorYellow
+                    buttonLightColor: Theme.colorLightYellow
                     buttonWidth: content.optionSize
                     buttonHeight: content.optionSize
                     buttonRadius: 12
@@ -216,6 +217,7 @@ PanelWindow {
                     backgroundColor: Theme.foreground
                     iconPath: "power.svg"
                     buttonColor: Theme.colorRed
+                    buttonLightColor: Theme.colorLightRed
                     buttonWidth: content.optionSize
                     buttonHeight: content.optionSize
                     buttonRadius: 12
@@ -227,6 +229,7 @@ PanelWindow {
                     backgroundColor: Theme.foreground
                     iconPath: "bed-double.svg"
                     buttonColor: Theme.colorBlue
+                    buttonLightColor: Theme.colorLightBlue
                     buttonWidth: content.optionSize
                     buttonHeight: content.optionSize
                     buttonRadius: 12
@@ -238,6 +241,7 @@ PanelWindow {
                     backgroundColor: Theme.foreground
                     iconPath: "lock.svg"
                     buttonColor: Theme.colorPurple
+                    buttonLightColor: Theme.colorLightPurple
                     buttonWidth: content.optionSize
                     buttonHeight: content.optionSize
                     buttonRadius: 12
@@ -249,6 +253,7 @@ PanelWindow {
                     backgroundColor: Theme.foreground
                     iconPath: "log-out.svg"
                     buttonColor: Theme.colorGreen
+                    buttonLightColor: Theme.colorLightGreen
                     buttonWidth: content.optionSize
                     buttonHeight: content.optionSize
                     buttonRadius: 12

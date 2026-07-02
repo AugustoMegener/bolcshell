@@ -10,6 +10,7 @@ Column {
   required property color backgroundColor
   required property string iconPath
   required property color buttonColor
+  required property color buttonLightColor
   required property int buttonWidth
   required property int buttonHeight
   required property int buttonRadius
@@ -39,14 +40,28 @@ Column {
       id: bg
       implicitWidth: parent.implicitWidth - 10
       implicitHeight: parent.implicitHeight - 10
-      color: menuOption.buttonColor
-      opacity: parent.hovered? 1: 0.25
+      color: parent.hovered? menuOption.buttonColor : menuOption.buttonLightColor
+      opacity: parent.hovered? 1: 0.2
       anchors.centerIn: parent
 
       radius: parent.hovered? menuOption.buttonRadius : width / 2
 
       Behavior on radius {
           NumberAnimation {
+              duration: 200
+              easing.type: Easing.InOutQuad
+          }
+      }
+
+      Behavior on opacity {
+          NumberAnimation {
+              duration: 200
+              easing.type: Easing.InOutQuad
+          }
+      }
+
+      Behavior on color {
+          ColorAnimation {
               duration: 200
               easing.type: Easing.InOutQuad
           }

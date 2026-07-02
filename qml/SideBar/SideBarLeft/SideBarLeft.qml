@@ -6,6 +6,7 @@ import "../SideBarToggle"
 import "../../Theme"
 import "./Content"
 import "../../Components/Ribbon/"
+import "../../Components/TmuxSessionManager/"
 
 SideBar {
   id: sideBarRoot
@@ -32,6 +33,18 @@ SideBar {
       Ribbon { }
     }
 
-    Content { }
+    ColumnLayout {
+      visible: SideBarState.leftOpen
+      Layout.fillWidth: true
+
+
+      TmuxSessionManager {
+        window: sideBarRoot
+        managerEnabled: SideBarState.leftOpen
+        Layout.fillWidth: true   
+      }
+
+    }
   }
+
 }

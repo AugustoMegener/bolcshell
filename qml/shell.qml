@@ -13,7 +13,7 @@ import "./DynamicIsland/"
 
 ShellRoot { 
   id: root 
-  
+
 
   PowerMenuShortcut {} 
   PowerMenu {} 
@@ -47,7 +47,9 @@ ShellRoot {
 
   }
 
-  SideBarLeft {}
+  SideBarLeft {
+
+  }
 
   Variants {
     model: Quickshell.screens
@@ -60,10 +62,12 @@ ShellRoot {
   }
   KeyboardRgb {}
 
-  TopBar { }
+  TopBar {}
 
   DynamicIsland {  
-      anchors { top: true } 
-      margins.top: 5
+    anchors { top: true } 
+    margins.top: 5
   }
+
+
 }
