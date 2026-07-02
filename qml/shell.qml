@@ -9,7 +9,7 @@ import "./KeyboardRgb"
 import "./SideBar/SideBarLeft"
 import "./SideBar/SideBarToggle"
 import "./Components/PowerMenu/"
-import "./Components/TrayList/"
+import "./DynamicIsland/"
 
 ShellRoot { 
   id: root 
@@ -61,4 +61,9 @@ ShellRoot {
   KeyboardRgb {}
 
   TopBar { }
+
+  DynamicIsland {  
+      anchors { top: true } 
+      margins.top: 5
+  }
 }

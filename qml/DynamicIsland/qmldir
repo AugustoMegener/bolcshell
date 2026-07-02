@@ -1,0 +1,3 @@
+module DynamicIsland
+DynamicIsland 1.0 DynamicIsland.qml
+singleton DynamicIslandState 1.0 DynamicIslandState.qml

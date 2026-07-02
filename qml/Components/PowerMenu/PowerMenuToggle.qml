@@ -18,8 +18,7 @@ Item {
   Rectangle {
     implicitWidth: 32
     implicitHeight: 32
-    color: Theme.activeAltColor
-    opacity: parent.hovered? 1: 0.25
+    color: parent.hovered? Theme.activeAltColor : Theme.activeAltLightColor
     anchors.centerIn: parent
 
 

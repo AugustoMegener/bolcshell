@@ -15,7 +15,7 @@
       apps.default = {
         type = "app";
         program = "${pkgs.writeShellScript "run" ''
-          export PATH="${self'.packages.primary-shell}/bin:$PATH"
+          export PATH="${self'.packages.bolcshell-server}/bin:$PATH"
           exec ${qs}/bin/quickshell -p ${./../../qml}
         ''}";
       };
@@ -23,6 +23,17 @@
         nativeBuildInputs = [ pkgs.pkg-config ];
         buildInputs = [ pkgs.openssl ];
       };
-      packages.default = self'.packages.primary-shell;
+      packages.bolcshell-server = pkgs.symlinkJoin {
+        name = "bolcshell-server";
+        paths = [ self'.packages.primary-shell ];
+        postBuild = ''
+          mv $out/bin/primary-shell $out/bin/bolcshell-server
+        '';
+      };
+      packages.bolcshell = pkgs.writeShellScriptBin "bolcshell" ''
+        export PATH="${self'.packages.bolcshell-server}/bin:$PATH"
+        exec ${qs}/bin/quickshell -p ${./../../qml} "$@"
+      '';
+      packages.default = self'.packages.bolcshell;
     };
 }
