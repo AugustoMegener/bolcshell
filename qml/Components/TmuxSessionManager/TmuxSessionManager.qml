@@ -40,11 +40,15 @@ Item {
 
   property var sessions: []
 
+  onVisibleChanged: {
+    tmuxLs.running = sessionManager.visible
+  }
+
   Process {
     id: tmuxLs
     command: ["tmux", "list-sessions", "-F", "#{session_name}|#{session_windows}|#{session_created}|#{session_attached}"]
-    running: true
-    onRunningChanged: if (!running) running = true
+    running: sessionManager.visible
+    onRunningChanged: if (!running) running = sessionManager.visible
     stdout: StdioCollector {
       onStreamFinished: {
         sessionManager.sessions = text.trim().split("\n").filter(l => l.length > 0).map(line => {
@@ -106,13 +110,18 @@ Item {
 
           property color altColor: Theme.altColor(index + 1)
 
+          onVisibleChanged: {
+            tmuxLsw.running = card.visible
+          }
 
           property var windows: []
           Process {
+            id: tmuxLsw
             command: ["tmux", "lsw", "-t", card.sessionName, "-F", "#{window_index}|#{window_name}|#{window_active}|#{window_panes}"]
 
-            running: true
-            onRunningChanged: if (!running) running = true
+            running: card.visible
+            onRunningChanged: if (!running) tmuxLsw.running = card.visible
+
             stdout: StdioCollector {
               onStreamFinished: {
                 card.windows = text.trim().split("\n").filter(l => l.length > 0).map(line => {
@@ -240,6 +249,8 @@ Item {
                   }
                 }
               }
+
+
             }
           }
         }
