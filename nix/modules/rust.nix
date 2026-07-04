@@ -10,7 +10,7 @@
         withWayland = true;
         withHyprland = true;
       };
-      qmlImportPath = pkgs.lib.makeSearchPath "lib/qml" [
+      qmlImportPath = pkgs.lib.makeSearchPath "lib/qt-6/qml" [
         pkgs.qt6.qt5compat
       ];
     in
