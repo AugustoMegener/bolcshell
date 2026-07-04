@@ -10,12 +10,16 @@
         withWayland = true;
         withHyprland = true;
       };
+      qmlImportPath = pkgs.lib.makeSearchPath "lib/qml" [
+        pkgs.qt6.qt5compat
+      ];
     in
     {
       apps.default = {
         type = "app";
         program = "${pkgs.writeShellScript "run" ''
           export PATH="${self'.packages.bolcshell-server}/bin:$PATH"
+          export QML2_IMPORT_PATH="${qmlImportPath}:$QML2_IMPORT_PATH"
           exec ${qs}/bin/quickshell -p ${./../../qml}
         ''}";
       };
@@ -32,6 +36,7 @@
       };
       packages.bolcshell = pkgs.writeShellScriptBin "bolcshell" ''
         export PATH="${self'.packages.bolcshell-server}/bin:$PATH"
+        export QML2_IMPORT_PATH="${qmlImportPath}:$QML2_IMPORT_PATH"
         exec ${qs}/bin/quickshell -p ${./../../qml} "$@"
       '';
       packages.default = self'.packages.bolcshell;
