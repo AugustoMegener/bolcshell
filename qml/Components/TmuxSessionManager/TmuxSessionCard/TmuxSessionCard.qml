@@ -15,6 +15,7 @@ Item {
   required property int sessionWindows
   required property bool sessionAttached
 
+  required property bool cardEnabled
 
   property color altColor: Theme.altColor(index + 1)
 
@@ -27,8 +28,8 @@ Item {
     id: tmuxLsw
     command: ["tmux", "lsw", "-t", card.sessionName, "-F", "#{window_index}|#{window_name}|#{window_active}|#{window_panes}"]
 
-    running: card.visible
-    onRunningChanged: if (!running) tmuxLsw.running = card.visible
+    running: card.cardEnabled
+    onRunningChanged: if (!running) tmuxLsw.running = card.cardEnabled
 
     stdout: StdioCollector {
       onStreamFinished: {

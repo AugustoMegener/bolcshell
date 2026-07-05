@@ -37,14 +37,14 @@ Item {
   property var sessions: []
 
   onVisibleChanged: {
-    tmuxLs.running = sessionManager.visible
+    tmuxLs.running = sessionManager.managerEnabled
   }
 
   Process {
     id: tmuxLs
     command: ["tmux", "list-sessions", "-F", "#{session_name}|#{session_windows}|#{session_created}|#{session_attached}"]
-    running: sessionManager.visible
-    onRunningChanged: if (!running) running = sessionManager.visible
+    running: sessionManager.managerEnabled
+    onRunningChanged: if (!running) running = sessionManager.managerEnabled
     stdout: StdioCollector {
       onStreamFinished: {
         sessionManager.sessions = text.trim().split("\n").filter(l => l.length > 0).map(line => {
@@ -99,6 +99,7 @@ Item {
           sessionName: sessionManager.sessions[card.index].name
           sessionWindows: sessionManager.sessions[card.index].windows
           sessionAttached: sessionManager.sessions[card.index].attached
+          cardEnabled: sessionManager.managerEnabled
 
           width: column.width - 20
           height: 100
