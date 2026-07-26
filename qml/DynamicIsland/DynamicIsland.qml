@@ -5,7 +5,6 @@ import "../Theme"
 import "."
 import Qt5Compat.GraphicalEffects
 
-import Qt5Compat.GraphicalEffects
 
 PanelWindow {
     width: islandRect.width + 40

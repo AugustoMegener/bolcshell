@@ -14,5 +14,6 @@ Rectangle {
 
   PowerMenuToggle {
     anchors.bottom: parent.bottom
+    anchors.bottomMargin: -11 
   }
 }

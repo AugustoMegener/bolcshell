@@ -1,6 +1,7 @@
 import QtQuick
 import "../../PowerMenu"
 import "../../../Theme"
+import "../../../Misc/Button"
 import Quickshell
 import Qt5Compat.GraphicalEffects
 
@@ -16,7 +17,75 @@ Column {
   required property int buttonRadius
   required property string command
 
-  Item {
+
+    property bool hasRadiusLeft: false
+    property bool hasRadiusRight: false
+
+  Button {
+
+    id: button
+    buttonWidth: menuOption.buttonWidth + (menuOption.hasRadiusLeft || menuOption.hasRadiusRight? 5 : 0)
+    buttonHeight: menuOption.buttonHeight
+
+
+    backgroundColor:  Theme.buttonColor //Theme.mixColors(Theme.buttonColor, menuOption.buttonLightColor, 0.10)
+
+    
+    radiusLeft: menuOption.hasRadiusLeft? (button.buttonHeight - 20) * 0.75 : 0
+    radiusRight: menuOption.hasRadiusRight? (button.buttonHeight - 20) * 0.75 : 0
+
+
+    onClicked: {
+        PowerMenuState.isPowerMenuOpen = false
+        Quickshell.execDetached(["sh", "-c", "sleep 0.75 &&" + menuOption.command])
+    }
+
+    Item {
+      width: menuOption.hasRadiusLeft ? 5 : 0
+      height: 1
+    }
+    
+    Column {
+
+      Item {
+        width: button.buttonWidth - 30
+        height: button.buttonHeight - 30
+
+        anchors.horizontalCenter: parent.horizontalCenter
+        Image {
+            id: icon
+            anchors.fill: parent
+            fillMode: Image.PreserveAspectFit
+            sourceSize.width: width
+            sourceSize.height: height
+            source: "../../../assets/icons/" + menuOption.iconPath
+        }
+        ColorOverlay {
+          anchors.fill: icon
+          source: icon
+          color: menuOption.buttonLightColor //Theme.dim
+
+            opacity: 0.75
+        }
+      }
+      /*Text {
+          text: qsTr(menuOption.label)
+          color: menuOption.buttonColor //Theme.text
+          font.pixelSize: 12
+          font.bold: true
+          width: parent.width
+          horizontalAlignment: Text.AlignHCenter
+        }*/
+    }
+
+    Item {
+      width: menuOption.hasRadiusRight ? 5 : 0
+      height: 1
+    }
+
+  }
+
+  /*Item {
     id: button
 
     implicitWidth: menuOption.buttonWidth
@@ -30,6 +99,7 @@ Column {
         anchors.fill: parent
         hoverEnabled: true
 
+        cursorShape: Qt.PointingHandCursor
         onClicked: {
             PowerMenuState.isPowerMenuOpen = false
             Quickshell.execDetached(["sh", "-c", "sleep 0.75 &&" + menuOption.command])
@@ -87,16 +157,7 @@ Column {
       source: icon
       color: parent.hovered? menuOption.backgroundColor : menuOption.buttonColor
     }
-  }
+  }*/
 
-Text {
-    text: qsTr(menuOption.label)
-    //font.bold: true
 
-    color: Theme.text
-    font.pixelSize: 16
-
-    width: button.width
-    horizontalAlignment: Text.AlignHCenter
-}
 }

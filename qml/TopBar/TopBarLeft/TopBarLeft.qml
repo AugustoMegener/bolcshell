@@ -1,7 +1,7 @@
 import QtQuick
-import "../../SideBar/SideBarToggle"
-
+import "../../Misc/Button"
 import "../../Theme"
+
 
 Row {
   id: workspaces

@@ -108,8 +108,8 @@ PanelWindow {
 
             text: Qt.formatDateTime(clock.date, "h'h'mm")
 
-            color: Theme.text
-            font.pixelSize: 80
+            color:  Theme.dim //Theme.text
+            font.pixelSize: 60
             opacity: 0
 
             transform: Translate {
@@ -150,8 +150,8 @@ PanelWindow {
 
             anchors.centerIn: parent
 
-            implicitWidth: content.implicitWidth + 25
-            implicitHeight: content.implicitHeight + 15
+            implicitWidth: content.implicitWidth  - 10
+            implicitHeight: content.implicitHeight - 10
 
             radius: 12
             color: Theme.foreground
@@ -196,11 +196,12 @@ PanelWindow {
                 id: content
 
                 anchors.centerIn: parent
-                spacing: 25
+                spacing: -32
 
-                property int optionSize: 75
+                property int optionSize: 60
 
                 PowerMenuOption {
+                    hasRadiusLeft: true
                     label: "Reboot"
                     backgroundColor: Theme.foreground
                     iconPath: "rotate-ccw.svg"
@@ -249,6 +250,7 @@ PanelWindow {
                 }
 
                 PowerMenuOption {
+                    hasRadiusRight: true
                     label: "Log out"
                     backgroundColor: Theme.foreground
                     iconPath: "log-out.svg"

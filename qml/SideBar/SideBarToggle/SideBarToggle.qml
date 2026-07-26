@@ -44,6 +44,7 @@ Item {
 
   MouseArea {
     anchors.fill: toggleIcon
+    cursorShape: Qt.PointingHandCursor
     z: 2
     enabled: visible
     onPressed: {

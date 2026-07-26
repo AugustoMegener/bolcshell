@@ -2,6 +2,7 @@ import Quickshell
 import Quickshell.Wayland
 import QtQuick
 import Quickshell.Hyprland
+import "./../Misc/CRTFilter"
 
 Scope {
   required property ShellScreen screen
@@ -44,6 +45,8 @@ Component.onCompleted: {
       property real shadowSize: 35
       property color shadowColor: "#BF1f1914"
     }
+
+    CRTFilter {}
   }
 
   PanelWindow {

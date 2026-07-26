@@ -4,6 +4,7 @@ import QtQuick
 import "../../../Shapes/DragCardShape"
 import "../../../Theme"
 import "../../../Misc/TermLine"
+import "../../../Misc/Button"
 import Quickshell.Io
 
 
@@ -54,6 +55,14 @@ Item {
     gripColor: Theme.dim
   }
 
+  MouseArea {
+    x: cardShape.tabX
+    y: cardShape.tabY
+    width: cardShape.tabWidth
+    height: cardShape.tabHeight
+    cursorShape: Qt.OpenHandCursor
+  }
+
   Item {
     width: cardShape.contentWidth - 10
     height: cardShape.contentHeight - 10 
@@ -93,72 +102,145 @@ Item {
           }
         }
 
-        Rectangle {
-          visible: card.sessionAttached
+
+        Row {
           anchors.right: parent.right
           anchors.verticalCenter: parent.verticalCenter
+          anchors.rightMargin: -16 
+          spacing: -32
 
-          width: attachedLabelText.height
-          height: attachedLabelText.height
+          Button {
 
-          color: card.altColor
+            buttonWidth: attachedLabelTextDelete.height + 9
 
-          radius: width
+            buttonHeight: buttonWidth
 
-          Text {
-            id: attachedLabelText
-            text: qsTr(" ")
+            backgroundColor: Theme.dangerButtonColor
 
-            anchors.centerIn: parent
+            buttonInsetShadowSize: 1
 
-            font.pointSize: 12
-            font.weight: Font.Bold
-            color: Theme.foreground
-          }
-
-          MouseArea {
-            anchors.fill: parent
             onClicked: {
-              Quickshell.execDetached(["sh", Quickshell.shellDir + "/assets/scripts/focus-tmux-hyprwin.sh", card.sessionName])
+              Quickshell.execDetached(["tmux", "kill-session", "-t", card.sessionName])
+            }
+
+            radiusRight: 0
+
+            Text {
+              id: attachedLabelTextDelete
+              text: qsTr(" ") 
+
+              anchors.centerIn: parent
+
+              font.pointSize: 8
+              font.weight: Font.Bold
+              color: Theme.text
             }
           }
-        }
-      }
 
-      Flow {
-        width: parent.width
-        height: 50
-        spacing: 5
+          Button {
 
-        Repeater {
-          model: card.windows.length
+            buttonWidth: attachedLabelText.height + 9
 
-          TermLine {
-            required property int index
+            buttonHeight: buttonWidth
 
-            property int windowIndex: card.windows[index].index
-            property string windowName: card.windows[index].name
-            property bool windowActive: card.windows[index].active
-            property int windowPanels: card.windows[index].panels
 
-            charHeight: 11
+            backgroundColor: Theme.mainButtonColor
 
-            charHeightProportion: 0.86
-            bgWidthProportion: 0.953
 
-            segments: windowActive? [
-              { text: "", bg: Theme.foreground, fg: Theme.lightForeground },
-              { text: "" + windowIndex, bg: Theme.lightForeground, fg: Theme.text },
-              { text: "", bg: card.altColor, fg: Theme.lightForeground },
-              { text: " " + windowName + "  " + windowPanels, bg: card.altColor, fg: Theme.foreground },
-              { text: "", bg: Theme.foreground, fg: card.altColor},
-            ] : [
-              { text: "" + windowIndex + " " + windowName + "  " + windowPanels, bg: card.foreground, fg: Theme.dim },
-            ]
+            buttonInsetShadowSize: 1
+
+            onClicked: {
+              if (card.sessionAttached) {
+                Quickshell.execDetached(["sh", Quickshell.shellDir + "/assets/scripts/focus-tmux-hyprwin.sh", card.sessionName])
+              } else {
+                Quickshell.execDetached(["kitty", "sh", "-ic", `tmux attach-session -t ${card.sessionName}`])
+              }
+            }
+
+
+            radiusLeft: 0
+
+            Text {
+              id: attachedLabelText
+              text: card.sessionAttached? qsTr("󰓾 ") : qsTr(" ")
+
+              anchors.centerIn: parent
+
+              font.pointSize: 8
+              font.weight: Font.Bold
+              color: Theme.text
+            }
           }
-        }
-      }
-    }
-  }
-}
+        } 
+
+        /*Rectangle {
+           visible: card.sessionAttached
+           anchors.right: parent.right
+           anchors.verticalCenter: parent.verticalCenter
+
+           width: attachedLabelText.height
+           height: attachedLabelText.height
+
+           color: card.altColor
+
+           radius: width
+
+           Text {
+             id: attachedLabelText
+             text: qsTr(" ")
+
+             anchors.centerIn: parent
+
+             font.pointSize: 12
+             font.weight: Font.Bold
+             color: Theme.foreground
+           }
+
+           MouseArea {
+             anchors.fill: parent
+
+             cursorShape: Qt.PointingHandCursor
+             onClicked: {
+               Quickshell.execDetached(["sh", Quickshell.shellDir + "/assets/scripts/focus-tmux-hyprwin.sh", card.sessionName])
+             }
+           }
+         }*/
+       }
+
+       Flow {
+         width: parent.width
+         height: 50
+         spacing: 5
+
+         Repeater {
+           model: card.windows.length
+
+           TermLine {
+             required property int index
+
+             property int windowIndex: card.windows[index].index
+             property string windowName: card.windows[index].name
+             property bool windowActive: card.windows[index].active
+             property int windowPanels: card.windows[index].panels
+
+             charHeight: 11
+
+             charHeightProportion: 0.86
+             bgWidthProportion: 0.953
+
+             segments: windowActive? [
+               { text: "", bg: Theme.foreground, fg: Theme.lightForeground },
+               { text: "" + windowIndex, bg: Theme.lightForeground, fg: Theme.text },
+               { text: "", bg: card.altColor, fg: Theme.lightForeground },
+               { text: " " + windowName + (windowPanels > 1? "  " + windowPanels : ""), bg: card.altColor, fg: Theme.foreground },
+               { text: "", bg: Theme.foreground, fg: card.altColor},
+             ] : [
+               { text: "" + windowIndex + " " + windowName + (windowPanels > 1? "  " + windowPanels : ""), bg: card.foreground, fg: Theme.dim },
+             ]
+           }
+         }
+       }
+     }
+   }
+ }
 

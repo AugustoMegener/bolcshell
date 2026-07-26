@@ -70,6 +70,7 @@ Repeater {
 
       MouseArea {
         anchors.fill: parent
+        cursorShape: Qt.PointingHandCursor
         onClicked: Hyprland.dispatch(`workspace ${workspace.index}`)
         z: 2
       }

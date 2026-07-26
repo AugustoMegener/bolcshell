@@ -38,6 +38,7 @@ Repeater {
     MouseArea {
       id: trayMouse
       anchors.fill: parent
+      cursorShape: Qt.PointingHandCursor
       hoverEnabled: true
       acceptedButtons: Qt.LeftButton | Qt.RightButton | Qt.MiddleButton
       onClicked: (event) => {

@@ -48,6 +48,10 @@ Component.onCompleted: {
   readonly property color border: "#3b3026"
   readonly property color dim: "#866f51"
   readonly property color text: "#d5bfa1"  
+  readonly property color buttonColor: "#26211c"
+  readonly property color mainButtonColor: "#5A4533"
+  readonly property color dangerButtonColor: "#df2d28"
+
   readonly property int fontSize: 14
 
 
@@ -79,5 +83,14 @@ Component.onCompleted: {
   property var altIcon: function(i) {
     const icons = [ "circle", "triangle", "square"  ]
     return "assets/icons/" + ((i === 0) ? "astroid" : icons[(i - 1) % 3]) + ".svg"
+  }
+
+  function mixColors(colorA, colorB, ratio) {
+      return Qt.rgba(
+          colorA.r * (1 - ratio) + colorB.r * ratio,
+          colorA.g * (1 - ratio) + colorB.g * ratio,
+          colorA.b * (1 - ratio) + colorB.b * ratio,
+          colorA.a * (1 - ratio) + colorB.a * ratio
+      )
   }
 }

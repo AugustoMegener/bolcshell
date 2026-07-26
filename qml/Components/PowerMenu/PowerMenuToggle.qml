@@ -2,7 +2,39 @@ import QtQuick
 import "../../Theme/"
 import Qt5Compat.GraphicalEffects
 import "../PowerMenu"
+import "../../Misc/Button"
 
+Button {
+  buttonHeight: 35
+  buttonWidth: 35
+  anchors.horizontalCenter: parent.horizontalCenter
+
+  backgroundColor: Theme.mixColors(Theme.mainButtonColor, Theme.activeAltColor, 0.25)
+
+  cornerRadius: 12
+
+
+  Image {
+    opacity: 1
+    id: icon
+    anchors.centerIn: parent
+    source: "../../assets/icons/" + ( PowerMenuState.isPowerMenuOpen? "sun" : "moon") + ".svg"
+    
+        sourceSize.width: width
+        sourceSize.height: height
+  }
+
+  ColorOverlay {
+    anchors.fill: icon
+    source: icon
+    color: Theme.activeAltLightColor
+  }
+
+
+  onClicked: { PowerMenuState.isPowerMenuOpen = !PowerMenuState.isPowerMenuOpen }
+}
+
+/*
 Item {
   implicitWidth: 42
   implicitHeight: 42
@@ -11,6 +43,8 @@ Item {
   MouseArea {
     id: mouse
     anchors.fill: parent
+
+    cursorShape: Qt.PointingHandCursor
     hoverEnabled: true
     onClicked: { PowerMenuState.isPowerMenuOpen = !PowerMenuState.isPowerMenuOpen }
   }
@@ -64,4 +98,4 @@ Item {
     source: icon
     color: parent.hovered? Theme.background : Theme.activeAltColor
   }
-}
+}*/
