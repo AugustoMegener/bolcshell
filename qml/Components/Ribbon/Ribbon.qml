@@ -12,8 +12,4 @@ Rectangle {
   border.color: Theme.border
   radius: 12
 
-  PowerMenuToggle {
-    anchors.bottom: parent.bottom
-    anchors.bottomMargin: -11 
-  }
 }
