@@ -24,15 +24,18 @@ Column {
   Button {
 
     id: button
-    buttonWidth: menuOption.buttonWidth + (menuOption.hasRadiusLeft || menuOption.hasRadiusRight? 5 : 0)
+    buttonWidth: menuOption.buttonWidth + (menuOption.hasRadiusLeft || menuOption.hasRadiusRight? 2 : 0)
     buttonHeight: menuOption.buttonHeight
 
 
-    backgroundColor:  Theme.buttonColor //Theme.mixColors(Theme.buttonColor, menuOption.buttonLightColor, 0.10)
+    backgroundColor:  menuOption.buttonColor
+
+
+    buttonInsetShadowSize: 6
 
     
-    radiusLeft: menuOption.hasRadiusLeft? (button.buttonHeight - 20) * 0.75 : 0
-    radiusRight: menuOption.hasRadiusRight? (button.buttonHeight - 20) * 0.75 : 0
+    radiusLeft: menuOption.hasRadiusLeft? 20 : 0
+    radiusRight: menuOption.hasRadiusRight? 20 : 0
 
 
     onClicked: {
@@ -41,7 +44,7 @@ Column {
     }
 
     Item {
-      width: menuOption.hasRadiusLeft ? 5 : 0
+      width: menuOption.hasRadiusLeft ? 2 : 0
       height: 1
     }
     
@@ -63,7 +66,7 @@ Column {
         ColorOverlay {
           anchors.fill: icon
           source: icon
-          color: menuOption.buttonLightColor //Theme.dim
+          color:  Theme.text //menuOption.buttonLightColor //Theme.dim
 
             opacity: 0.75
         }
@@ -79,7 +82,7 @@ Column {
     }
 
     Item {
-      width: menuOption.hasRadiusRight ? 5 : 0
+      width: menuOption.hasRadiusRight ? 2 : 0
       height: 1
     }
 

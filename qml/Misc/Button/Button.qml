@@ -17,9 +17,10 @@ Item {
     property real shadowMargin: 16
     default property alias content: content.data
     signal clicked()
-
-    width: buttonWidth + 2 * shadowMargin
-    height: buttonHeight + 2 * shadowMargin
+    implicitWidth: buttonWidth + 2 * shadowMargin
+    implicitHeight: buttonHeight + 2 * shadowMargin
+    width: implicitWidth
+    height: implicitHeight
 
     Rectangle {
         id: box

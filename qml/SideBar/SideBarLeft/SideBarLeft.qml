@@ -1,12 +1,10 @@
-import Quickshell
 import QtQuick
 import QtQuick.Layouts
 import "../../SideBar"
 import "../SideBarToggle"
-import "../../Theme"
-import "./Content"
 import "../../Components/Ribbon/"
 import "../../Components/TmuxSessionManager/"
+import "../../Components/PowerMenu"
 
 SideBar {
   id: sideBarRoot
@@ -31,6 +29,17 @@ SideBar {
         }
       }
       Ribbon { }
+      Rectangle {
+
+      }
+      Item {
+        Layout.preferredWidth: 35
+        Layout.preferredHeight: 35
+        Layout.alignment: Qt.AlignHCenter
+        PowerMenuToggle {
+          anchors.centerIn: parent
+        }
+      }
     }
 
     ColumnLayout {

@@ -36,14 +36,14 @@ Component.onCompleted: {
       enabled: false
       fragmentShader: Qt.resolvedUrl("../assets/shaders/border.frag.qsb")
       property real thickness: borderWindow.hasTiledWindow? 9999 : 10.5
-      property real innerRadius: 15
+      property real innerRadius: 12
       property real w: width
       property real h: height
       property color borderColor: "#2b2622"
       property real innerThickness: 1
       property color innerColor: borderWindow.hasTiledWindow? "#2b2622" : "#3d332a"
-      property real shadowSize: 35
-      property color shadowColor: "#BF1f1914"
+      property real shadowSize: 25
+      property color shadowColor: "#BF1f1910"
     }
 
     CRTFilter {}

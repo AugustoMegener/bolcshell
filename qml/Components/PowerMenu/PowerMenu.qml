@@ -102,13 +102,13 @@ PanelWindow {
         Text {
             id: clockText
 
+            anchors.top: parent.top
             anchors.horizontalCenter: parent.horizontalCenter
-            anchors.bottom: card.top
-            anchors.bottomMargin: 50
+            anchors.topMargin: 100
 
             text: Qt.formatDateTime(clock.date, "h'h'mm")
 
-            color:  Theme.dim //Theme.text
+            color:  Theme.text //Theme.text
             font.pixelSize: 60
             opacity: 0
 
@@ -148,10 +148,12 @@ PanelWindow {
         Rectangle {
             id: card
 
-            anchors.centerIn: parent
+            anchors.bottom: parent.bottom
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.bottomMargin: 10
 
-            implicitWidth: content.implicitWidth  - 10
-            implicitHeight: content.implicitHeight - 10
+            implicitWidth: content.implicitWidth  - 15
+            implicitHeight: content.implicitHeight - 15
 
             radius: 12
             color: Theme.foreground
@@ -198,14 +200,14 @@ PanelWindow {
                 anchors.centerIn: parent
                 spacing: -32
 
-                property int optionSize: 60
+                property int optionSize: 50
 
                 PowerMenuOption {
                     hasRadiusLeft: true
                     label: "Reboot"
                     backgroundColor: Theme.foreground
                     iconPath: "rotate-ccw.svg"
-                    buttonColor: Theme.colorYellow
+                    buttonColor: Theme.buttonColor
                     buttonLightColor: Theme.colorLightYellow
                     buttonWidth: content.optionSize
                     buttonHeight: content.optionSize
@@ -217,7 +219,7 @@ PanelWindow {
                     label: "Shutdown"
                     backgroundColor: Theme.foreground
                     iconPath: "power.svg"
-                    buttonColor: Theme.colorRed
+                    buttonColor: Theme.buttonColor
                     buttonLightColor: Theme.colorLightRed
                     buttonWidth: content.optionSize
                     buttonHeight: content.optionSize
@@ -228,8 +230,8 @@ PanelWindow {
                 PowerMenuOption {
                     label: "Hibernate"
                     backgroundColor: Theme.foreground
-                    iconPath: "bed-double.svg"
-                    buttonColor: Theme.colorBlue
+                    iconPath: "zzz.svg"
+                    buttonColor: Theme.mainButtonColor
                     buttonLightColor: Theme.colorLightBlue
                     buttonWidth: content.optionSize
                     buttonHeight: content.optionSize
@@ -241,7 +243,7 @@ PanelWindow {
                     label: "Lock"
                     backgroundColor: Theme.foreground
                     iconPath: "lock.svg"
-                    buttonColor: Theme.colorPurple
+                    buttonColor: Theme.buttonColor
                     buttonLightColor: Theme.colorLightPurple
                     buttonWidth: content.optionSize
                     buttonHeight: content.optionSize
@@ -254,7 +256,7 @@ PanelWindow {
                     label: "Log out"
                     backgroundColor: Theme.foreground
                     iconPath: "log-out.svg"
-                    buttonColor: Theme.colorGreen
+                    buttonColor: Theme.buttonColor
                     buttonLightColor: Theme.colorLightGreen
                     buttonWidth: content.optionSize
                     buttonHeight: content.optionSize
@@ -268,11 +270,10 @@ PanelWindow {
             anchors.bottom: parent.bottom
             anchors.left: parent.left
 
-            anchors.leftMargin: 10
             anchors.bottomMargin: 10
 
-            implicitWidth: 42
-            implicitHeight: 42
+            implicitWidth: 64
+            implicitHeight: 35
 
             radius: 12
             color: "transparent"

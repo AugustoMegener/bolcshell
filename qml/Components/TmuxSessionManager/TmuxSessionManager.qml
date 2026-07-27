@@ -70,7 +70,7 @@ Item {
     clip: true
     contentHeight: column.height
 
-
+    
     ScrollBar.vertical: ScrollBar {
       policy: ScrollBar.AsNeeded
 
@@ -92,6 +92,7 @@ Item {
       bottomPadding: 5
 
       Repeater {
+        id: repeater
         model: sessionManager.sessions.length 
         TmuxSessionCard {
           id: card
@@ -103,6 +104,25 @@ Item {
 
           width: column.width - 20
           height: 100
+        }
+      }
+
+      Rectangle {
+        visible: repeater.count === 0
+
+        width: parent.width
+        height: 100
+
+        color: "transparent"
+
+        Text {
+            anchors.centerIn: parent
+
+            text: "No Tmux sessions open."
+            color: Theme.dim
+            font.pointSize: 14
+
+            horizontalAlignment: Text.AlignHCenter
         }
       }
     }
