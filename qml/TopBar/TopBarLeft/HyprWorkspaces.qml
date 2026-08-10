@@ -34,7 +34,7 @@ Repeater {
       border.width: 1
       border.color: workspace.isFocused ? Theme.altColor(workspace.modelData) : Theme.transparent
 
-      color: workspace.isFocused ? "#312b24" : Theme.background
+      color: workspace.isFocused ? Theme.foreground : Theme.background
 
       layer.enabled: true
       layer.effect: ShaderEffect {
