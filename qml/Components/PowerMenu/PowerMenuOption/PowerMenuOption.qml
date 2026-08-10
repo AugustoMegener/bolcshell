@@ -31,7 +31,7 @@ Column {
     backgroundColor:  menuOption.buttonColor
 
 
-    buttonInsetShadowSize: 6
+    buttonInsetShadowSize: 3
 
     
     radiusLeft: menuOption.hasRadiusLeft? 20 : 0

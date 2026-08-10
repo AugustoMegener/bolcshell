@@ -6,29 +6,28 @@ import Quickshell.Io
 
 Singleton {
 
-FileView {
-    id: osRelease
-    path: "/etc/os-release"
-    watchChanges: false
-    onTextChanged: {
-        const match = osRelease.text().match(/^ID=(.+)$/m);
-        if (match) distroId = match[1].trim();
-    }
-}
-
+  FileView {
+      id: osRelease
+      path: "/etc/os-release"
+      watchChanges: false
+      onTextChanged: {
+          const match = osRelease.text().match(/^ID=(.+)$/m);
+          if (match) distroId = match[1].trim();
+      }
+  }
 
   property string distroId: "linux"
 
-Component.onCompleted: {
-    const text = osRelease.text();
-    const match = text.match(/^ID=(.+)$/m);
-    if (match) distroId = match[1].trim();
-}
+  Component.onCompleted: {
+      const text = osRelease.text();
+      const match = text.match(/^ID=(.+)$/m);
+      if (match) distroId = match[1].trim();
+  }
 
-  readonly property color colorPurple: "#4b4db8"
+  readonly property color colorPurple: "#4a4cba"
   readonly property color colorYellow: "#da9a22"
-  readonly property color colorRed: "#f25146"
-  readonly property color colorBlue: "#4396b7"
+  readonly property color colorRed: "#f35044"
+  readonly property color colorBlue: "#4197b9"
   readonly property color colorGreen: "#108454"
 
 
@@ -42,15 +41,15 @@ Component.onCompleted: {
   readonly property color transparent: "#00000000"
   readonly property string innershadowShader: "assets/shaders/innershadow.frag.qsb"
   readonly property color accent: colorYellow
-  readonly property color background: "#2b2622"
-  readonly property color foreground: "#302b24"
-  readonly property color lightForeground: "#40392d"
+  readonly property color background: "#26211c"
+  readonly property color foreground: "#2e261f"
+  readonly property color lightForeground: "#342c23"
   readonly property color border: "#3b3026"
-  readonly property color dim: "#866f51"
-  readonly property color text: "#d5bfa1"  
+  readonly property color dim: "#866f50"
+  readonly property color text: "#d7c0a3"  
   readonly property color buttonColor: "#26211c"
-  readonly property color mainButtonColor: "#5A4533"
-  readonly property color dangerButtonColor: "#df2d28"
+  readonly property color mainButtonColor: "#5a4533"
+  readonly property color dangerButtonColor: "#e02f29"
 
   readonly property int fontSize: 14
 

@@ -39,6 +39,6 @@ exclusiveZone: animatedZone
         anchors.left: side == "left" ? parent.left : undefined
         anchors.right: side == "right" ? parent.right : undefined
         implicitWidth: sidebar.animatedZone
-        color: "#2b2622"
-    }
+        color: Theme.background
+      }
 }

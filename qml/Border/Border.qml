@@ -3,6 +3,7 @@ import Quickshell.Wayland
 import QtQuick
 import Quickshell.Hyprland
 import "./../Misc/CRTFilter"
+import "../Theme"
 
 Scope {
   required property ShellScreen screen
@@ -39,7 +40,7 @@ Component.onCompleted: {
       property real innerRadius: 12
       property real w: width
       property real h: height
-      property color borderColor: "#2b2622"
+      property color borderColor: Theme.background
       property real innerThickness: 1
       property color innerColor: borderWindow.hasTiledWindow? "#2b2622" : "#3d332a"
       property real shadowSize: 25
