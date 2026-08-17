@@ -8,6 +8,17 @@ import "../Theme"
 Scope {
   required property ShellScreen screen
 
+  function snapInt(target) {
+    var dpr = screen.devicePixelRatio
+    for (var i = 0; i < 8; i++) {
+      var up = Math.round(target) + i
+      var down = Math.round(target) - i
+      if (Math.abs((up * dpr) - Math.round(up * dpr)) < 0.01) return up
+      if (down > 0 && Math.abs((down * dpr) - Math.round(down * dpr)) < 0.01) return down
+    }
+    return Math.round(target)
+  }
+
   PanelWindow {
     id: borderWindow
 
@@ -28,10 +39,9 @@ Scope {
     anchors { top: true; bottom: true; left: true; right: true }
 
     mask: Region {}
-Component.onCompleted: {
-    Quickshell.execDetached(["hyprctl", "keyword", "layerrule[noanim_border]:no_anim on"])
-    Quickshell.execDetached(["hyprctl", "keyword", "layerrule[noanim_border]:match:namespace border"])
-}
+    Component.onCompleted: {
+      Quickshell.execDetached(["hyprctl", "eval", "hl.layer_rule({ name = 'noanim_border', match = { namespace = 'border' }, no_anim = true })"])
+    }
     ShaderEffect {
       anchors.fill: parent
       enabled: false
@@ -56,7 +66,7 @@ Component.onCompleted: {
     screen: parent.screen
     color: "transparent"
     anchors { top: true; left: true; right: true }
-    implicitHeight: 3
+    implicitHeight: snapInt(3)
     mask: Region {}
   }
 
@@ -66,7 +76,7 @@ Component.onCompleted: {
     screen: parent.screen
     color: "transparent"
     anchors { bottom: true; left: true; right: true }
-    implicitHeight: 3
+    implicitHeight: snapInt(3)
     mask: Region {}
   }
 
@@ -76,7 +86,7 @@ Component.onCompleted: {
     screen: parent.screen
     color: "transparent"
     anchors { top: true; bottom: true; left: true }
-    implicitWidth: 3
+    implicitWidth: snapInt(3)
     mask: Region {}
   }
 
@@ -86,7 +96,7 @@ Component.onCompleted: {
     screen: parent.screen
     color: "transparent"
     anchors { top: true; bottom: true; right: true }
-    implicitWidth: 3
+    implicitWidth: snapInt(3)
     mask: Region {}
   }
 }

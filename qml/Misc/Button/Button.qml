@@ -50,7 +50,7 @@ Item {
         fragmentShader: "../../assets/shaders/button.frag.qsb"
     }
 
-    Row {
+    Item {
         id: content
         anchors.centerIn: parent
         anchors.verticalCenterOffset: mouseArea.pressed ? 1 : -1

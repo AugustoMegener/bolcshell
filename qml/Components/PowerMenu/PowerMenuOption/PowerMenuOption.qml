@@ -43,49 +43,51 @@ Column {
         Quickshell.execDetached(["sh", "-c", "sleep 0.75 &&" + menuOption.command])
     }
 
-    Item {
-      width: menuOption.hasRadiusLeft ? 2 : 0
-      height: 1
-    }
-    
-    Column {
+    Row {
 
       Item {
-        width: button.buttonWidth - 30
-        height: button.buttonHeight - 30
-
-        anchors.horizontalCenter: parent.horizontalCenter
-        Image {
-            id: icon
-            anchors.fill: parent
-            fillMode: Image.PreserveAspectFit
-            sourceSize.width: width
-            sourceSize.height: height
-            source: "../../../assets/icons/" + menuOption.iconPath
-        }
-        ColorOverlay {
-          anchors.fill: icon
-          source: icon
-          color:  Theme.text //menuOption.buttonLightColor //Theme.dim
-
-            opacity: 0.75
-        }
+        width: menuOption.hasRadiusLeft ? 2 : 0
+        height: 1
       }
-      /*Text {
-          text: qsTr(menuOption.label)
-          color: menuOption.buttonColor //Theme.text
-          font.pixelSize: 12
-          font.bold: true
-          width: parent.width
-          horizontalAlignment: Text.AlignHCenter
-        }*/
-    }
+      
+    
 
-    Item {
-      width: menuOption.hasRadiusRight ? 2 : 0
-      height: 1
-    }
+        Item {
+          width: button.buttonWidth - 30
+          height: button.buttonHeight - 30
 
+          anchors.centerIn: parent
+          Image {
+              id: icon
+              anchors.fill: parent
+              fillMode: Image.PreserveAspectFit
+              sourceSize.width: width
+              sourceSize.height: height
+              source: "../../../assets/icons/" + menuOption.iconPath
+          }
+          ColorOverlay {
+            anchors.fill: icon
+            source: icon
+            color:  Theme.text //menuOption.buttonLightColor //Theme.dim
+
+              opacity: 0.75
+          }
+        }
+        /*Text {
+            text: qsTr(menuOption.label)
+            color: menuOption.buttonColor //Theme.text
+            font.pixelSize: 12
+            font.bold: true
+            width: parent.width
+            horizontalAlignment: Text.AlignHCenter
+          }*/
+      
+
+      Item {
+        width: menuOption.hasRadiusRight ? 2 : 0
+        height: 1
+      }
+    }
   }
 
   /*Item {

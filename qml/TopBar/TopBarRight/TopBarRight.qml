@@ -4,6 +4,7 @@ import "../../SideBar/SideBarToggle"
 import "../../SideBar"
 import "../../Components/NetworkStatus/"
 import "../../Components/CapslockStatus/"
+import "../../Components/BatterySatus/"
 import "../../Components/TrayList/"
 
 Row {
@@ -23,6 +24,7 @@ Row {
         panelWindow: Window.window
     }
 
+
     Rectangle {
       width: 2
       height: 20
@@ -30,6 +32,9 @@ Row {
       color: "transparent"
     }
 
+    BatteryStatus {
+      anchors.verticalCenter: parent.verticalCenter
+    }
     DateTime {
         anchors.verticalCenter: parent.verticalCenter
     }
