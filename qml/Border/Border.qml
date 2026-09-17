@@ -35,7 +35,7 @@ Scope {
 
 
     WlrLayershell.namespace: "border"
-    aboveWindows: ShellState.aboveWindows
+    aboveWindows: false
     WlrLayershell.exclusionMode: ExclusionMode.Normal
     WlrLayershell.keyboardFocus: WlrKeyboardFocus.None
     screen: parent.screen
@@ -48,11 +48,19 @@ Scope {
       Hyprland.refreshToplevels()
       Quickshell.execDetached(["hyprctl", "eval", "hl.layer_rule({ name = 'noanim_border', match = { namespace = 'border' }, no_anim = true })"])
     }
+
+
+  property bool hasTiledWindow: {
+    const ws = Hyprland.focusedMonitor?.activeWorkspace
+    if (!ws) return false
+    return ws.toplevels.values.some(w => !w.lastIpcObject?.floating)
+  }
+
     ShaderEffect {
       anchors.fill: parent
       enabled: false
       fragmentShader: Qt.resolvedUrl("../assets/shaders/border.frag.qsb")
-      property real thickness: ShellState.borderClosure >= 0 ? (borderWindow.width / 2) * ShellState.borderClosure : 10.5
+      property real thickness: borderWindow.hasTiledWindow ? (borderWindow.width / 2) : 10.5
 
       Behavior on thickness {
         NumberAnimation {

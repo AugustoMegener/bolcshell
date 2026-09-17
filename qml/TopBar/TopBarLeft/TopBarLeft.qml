@@ -1,14 +1,14 @@
 import QtQuick
 import "../../Misc/Button"
 import "../../Theme"
+import "../../Components/SystemSection/"
 
 
 Row {
   id: workspaces
   spacing: 33
 
-  Row {
-    spacing: 4
-    HyprWorkspaces { }
+  SystemSection {
+
   }
 }

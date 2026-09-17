@@ -42,7 +42,7 @@ Repeater {
         property real h: wsContent.height - 2.0
         property real offsetX: 1.0
         property real offsetY: 1.0
-property real radius: 8.0
+        property real radius: 8.0
 
         fragmentShader: workspace.isFocused ? "../../" + Theme.innershadowShader : ""
       }

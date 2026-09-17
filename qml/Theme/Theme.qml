@@ -42,9 +42,12 @@ Singleton {
   readonly property string innershadowShader: "assets/shaders/innershadow.frag.qsb"
   readonly property color accent: colorYellow
   readonly property color background: "#26211c"
+  readonly property color textInputBackground: "#1c1712"
   readonly property color  darkBackgound: "#1b1714"
   readonly property color foreground: "#2e261f"
   readonly property color lightForeground: "#342c23"
+  readonly property color messageBackground: "#51402f"
+  readonly property color messageForeground: "#ebdac6"
   readonly property color darkForeground: "#2b251e"
   readonly property color border: "#3b3026"
   readonly property color dim: "#866f50"

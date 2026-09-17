@@ -1,5 +1,5 @@
 import QtQuick
-import "../../PowerMenu"
+import "../../../MainMenu"
 import "../../../Theme"
 import "../../../Misc/Button"
 import Quickshell
@@ -39,7 +39,7 @@ Column {
 
 
     onClicked: {
-        PowerMenuState.isPowerMenuOpen = false
+        MainMenuState.isMainMenuOpen = false
         Quickshell.execDetached(["sh", "-c", "sleep 0.75 &&" + menuOption.command])
     }
 
@@ -106,7 +106,7 @@ Column {
 
         cursorShape: Qt.PointingHandCursor
         onClicked: {
-            PowerMenuState.isPowerMenuOpen = false
+            MainMenuState.isMainMenuOpen = false
             Quickshell.execDetached(["sh", "-c", "sleep 0.75 &&" + menuOption.command])
         }
     }

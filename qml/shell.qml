@@ -1,22 +1,22 @@
 //@ pragma UseQApplication
 pragma ComponentBehavior: Bound
 import Quickshell
+import Quickshell.Services.Notifications 
 import QtQuick
 import "./TopBar"
 import "./Border"
-import "./SideBar"
-import "./KeyboardRgb"
+import "./KeyboardRgb.qml"
 import "./SideBar/SideBarLeft"
 import "./SideBar/SideBarRight"
-import "./SideBar/SideBarToggle"
-import "./Components/PowerMenu/"
+import "./MainMenu/"
 import "./DynamicIsland/"
+import "./Services/NotificationStatus/"
 
 ShellRoot { 
   id: root 
 
 
-  PowerMenuShortcut {} 
+  MainMenuShortcut {} 
 
 
   SideBarRight {
@@ -39,12 +39,11 @@ ShellRoot {
 
   TopBar {}
 
-  PowerMenu {} 
+  MainMenu {} 
 
   DynamicIsland {  
     anchors { top: true } 
     margins.top: 5
   }
-
 
 }

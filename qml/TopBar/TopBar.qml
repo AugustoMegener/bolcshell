@@ -10,7 +10,7 @@ import "../ShellState"
 
 PanelWindow { 
   id: topbar
-  aboveWindows: ShellState.aboveWindows
+  aboveWindows: false
   WlrLayershell.namespace: "topbar"
   anchors { top: true; left: true; right: true }
 

@@ -1,8 +1,8 @@
 import QtQuick
-import "../../Theme/"
+import "../Theme/"
 import Qt5Compat.GraphicalEffects
-import "../PowerMenu"
-import "../../Misc/Button"
+import "../MainMenu"
+import "../Misc/Button"
 
 Button {
   buttonHeight: 35
@@ -18,7 +18,7 @@ Button {
     opacity: 1
     id: icon
     anchors.centerIn: parent
-    source: "../../assets/icons/" + ( PowerMenuState.isPowerMenuOpen? "sun" : "moon") + ".svg"
+    source: "../assets/icons/" + ( MainMenuState.isMainMenuOpen? "sun" : "moon") + ".svg"
     
         sourceSize.width: width
         sourceSize.height: height
@@ -31,7 +31,7 @@ Button {
   }
 
 
-  onClicked: { PowerMenuState.isPowerMenuOpen = !PowerMenuState.isPowerMenuOpen }
+  onClicked: { MainMenuState.isMainMenuOpen = !MainMenuState.isMainMenuOpen }
 }
 
 /*
@@ -46,7 +46,7 @@ Item {
 
     cursorShape: Qt.PointingHandCursor
     hoverEnabled: true
-    onClicked: { PowerMenuState.isPowerMenuOpen = !PowerMenuState.isPowerMenuOpen }
+    onClicked: { MainMenuState.isMainMenuOpen = !MainMenuState.isMainMenuOpen }
   }
 
   Rectangle {
@@ -87,7 +87,7 @@ Item {
     opacity: 1
     id: icon
     anchors.centerIn: parent
-    source: "../../assets/icons/" + ( PowerMenuState.isPowerMenuOpen? "sun" : "moon") + ".svg"
+    source: "../../assets/icons/" + ( MainMenuState.isMainMenuOpen? "sun" : "moon") + ".svg"
     
         sourceSize.width: width
         sourceSize.height: height

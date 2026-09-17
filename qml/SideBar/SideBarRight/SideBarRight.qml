@@ -1,17 +1,15 @@
 pragma ComponentBehavior: Bound
 
 import QtQuick
-import Quickshell
-import Qt5Compat.GraphicalEffects
 import QtQuick.Layouts
-import QtQuick.Controls.Basic 
-import Quickshell.Bluetooth 
 import "../../SideBar"
 import "../SideBarToggle"
+import "../../Theme/"
+import "../../Components/SectionBox/"
 import "../../Components/QuickSettings/"
 import "../../Components/BluetoothMenu/"
-import "../../Misc/Toggle/"
-import "../../Theme/"
+import "../../Services/NotificationStatus/"
+import "../../Components/NotificationMenu/"
 
 SideBar { 
   id: sidebar
@@ -33,85 +31,61 @@ SideBar {
     }
   }
   ColumnLayout {
-    visible: SideBarState.rightOpen
-    anchors.left: parent.left
-    anchors.right: parent.right
-    anchors.top: parent.top
+    anchors.fill: parent
 
     anchors.topMargin: 15
     anchors.rightMargin: 10
-    TabBar {
-      id: topTabBar
-      Layout.preferredWidth: parent.width - toggle.width 
-      implicitHeight: 33
-      background: Item {}
 
-      Repeater {
-        model: [
-          { icon: "../../assets/icons/sliders-horizontal.svg" },
-          { icon: "../../assets/icons/bluetooth.svg" }
-        ]
+    spacing: 8
 
-        TabButton {
-          id: topTabButton
-          required property int index 
-          required property var modelData
+    SectionBox {
+      visible: SideBarState.rightOpen
 
-          property int isCurrent: topTabBar.currentIndex == topTabButton.index
+      tabBarSizeOffset: toggle.width 
+      Layout.preferredHeight: parent.height / 2
 
-          width: 33
-          height: 33
-          anchors.top: parent.top
+      Layout.maximumHeight: parent.height / 2
+      Layout.fillWidth: true
 
-          background: Rectangle {
-            color: topTabButton.isCurrent? Theme.darkBackgound : "transparent"
-            radius: 3
-            border.width: topTabButton.isCurrent? 1 : 0
-            border.color: Theme.altColorNoPurple(topTabButton.index)
-            layer.enabled: topTabButton.isCurrent
-            layer.effect: ShaderEffect {
-              property real w: width - 2.0
-              property real h: height - 2.0
-              property real offsetX: 1.0
-              property real offsetY: 1.0
-              property real radius: 3.0
-              fragmentShader: "../../assets/shaders/innershadow.frag.qsb"
-            }
-            Image {
-              id: topTabButtonIcon
+      sections: [
+        QuickSettings {
+          property string icon: "../../assets/icons/sliders-horizontal.svg"
+          Layout.fillWidth: true
+        },
 
-              source: topTabButton.modelData.icon
-              anchors.centerIn: parent
+        BluetoothMenu {
 
-              width: 15
-              height: 15
-
-              ColorOverlay {
-
-                anchors.fill: parent
-                color: topTabButton.isCurrent? Theme.text : Theme.dim
-                source: topTabButtonIcon
-              }
-            }
-          }
+          property string icon: "../../assets/icons/bluetooth.svg"
+          Layout.fillWidth: true
         }
-      }
+      ]
     }
 
-    Item {
-      implicitHeight: 10
-      implicitWidth: 1
+    Rectangle {
+      implicitHeight: 1
+
+      Layout.fillWidth: true
+      Layout.leftMargin: -5
+      Layout.rightMargin: -5
+
+      color: Theme.border
     }
 
-    StackLayout {
-      currentIndex: topTabBar.currentIndex
+    SectionBox {
 
-      QuickSettings {
-        Layout.fillWidth: true
-      }
-      BluetoothMenu {
-        Layout.fillWidth: true
-      }
+      visible: SideBarState.rightOpen
+      Layout.fillWidth: true
+      Layout.fillHeight: true
+
+      sections: [
+        NotificationMenu {
+
+          property string icon: "../../assets/icons/" + (NotificationStatus.trackedNotifications.values.length == 0? "bell" : "bell-dot") + ".svg"
+          Layout.fillWidth: true
+
+          Layout.fillHeight: true
+        }
+      ]
     }
   }
 }

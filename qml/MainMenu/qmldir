@@ -1,0 +1,4 @@
+MainMenu 1.0 MainMenu.qml
+MainMenuShortcut 1.0 MainMenuShortcut.qml
+MainMenuToggle 1.0 MainMenuToggle.qml
+singleton MainMenuState 1.0 MainMenuState.qml

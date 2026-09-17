@@ -1,7 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import "../../Theme/"
-import "../PowerMenu"
+import "../MainMenu"
 
 Rectangle {
   id: rootRect

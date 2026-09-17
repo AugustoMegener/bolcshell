@@ -8,7 +8,7 @@ import Quickshell.Services.Pipewire
 Singleton {
     id: root
 
-    readonly property PwNode sink: Pipewire.defaultAudioSink
+   readonly property PwNode sink: Pipewire.defaultAudioSink
     readonly property bool muted: sink?.audio?.muted ?? false
     readonly property bool playing: peakMonitor.peak > 0.01
 

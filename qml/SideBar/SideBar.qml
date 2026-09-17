@@ -11,7 +11,7 @@ PanelWindow {
   required property string side
   WlrLayershell.namespace: "sidebar-" + side
   WlrLayershell.keyboardFocus: WlrKeyboardFocus.OnDemand
-  aboveWindows: ShellState.aboveWindows
+  aboveWindows: false
   color: "transparent"
   anchors {
       top: true

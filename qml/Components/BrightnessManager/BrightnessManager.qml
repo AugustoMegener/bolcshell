@@ -5,7 +5,7 @@ import QtQuick.Layouts
 import QtQuick.Controls
 import "../BrightnessManager/BrightnessState/"
 import "../../Theme/"
-import "../../Misc/RangeSlider/"
+import "../../Misc/RangeSlider/" as Misc
 
 Column {
   Item {
@@ -64,7 +64,7 @@ Column {
         width: 5
         height: 1 
       }
-      RangeSlider {
+      Misc.RangeSlider {
         id: volumeSlider
         hoverEnabled: true
         anchors.verticalCenter: parent.verticalCenter

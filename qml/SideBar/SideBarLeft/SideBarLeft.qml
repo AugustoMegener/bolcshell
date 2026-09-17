@@ -4,7 +4,7 @@ import "../../SideBar"
 import "../SideBarToggle"
 import "../../Components/Ribbon/"
 import "../../Components/TmuxSessionManager/"
-import "../../Components/PowerMenu"
+import "../../MainMenu/"
 
 SideBar {
   id: sideBarRoot
@@ -29,17 +29,17 @@ SideBar {
         }
       }
       Ribbon { }
-      Rectangle {
+ /*     Rectangle {
 
       }
       Item {
         Layout.preferredWidth: 35
         Layout.preferredHeight: 35
         Layout.alignment: Qt.AlignHCenter
-        PowerMenuToggle {
+        MainMenuToggle {
           anchors.centerIn: parent
         }
-      }
+      }*/
     }
 
     ColumnLayout {

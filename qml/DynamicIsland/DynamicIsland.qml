@@ -2,6 +2,7 @@ import Quickshell
 import QtQuick
 import Quickshell.Wayland
 import "../Theme"
+import "../MainMenu/"
 import "."
 import Qt5Compat.GraphicalEffects
 
@@ -10,7 +11,7 @@ PanelWindow {
     width: islandRect.width + 40
     height: islandRect.height + 40
     exclusionMode: ExclusionMode.Ignore
-    WlrLayershell.layer: WlrLayer.Bottom
+    WlrLayershell.layer: MainMenuState.isMainMenuOpen?  WlrLayer.Overlay : WlrLayer.Top
     color: "transparent"
 
     Rectangle {

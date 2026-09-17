@@ -2,8 +2,6 @@ pragma ComponentBehavior: Bound
 
 import QtQuick
 import Quickshell
-import Qt5Compat.GraphicalEffects
-import QtQuick.Layouts
 import QtQuick.Controls.Basic 
 import Quickshell.Bluetooth 
 import "../../Misc/Toggle/"
@@ -15,8 +13,13 @@ Column {
   spacing: -5
 
   Item {
+    width: 50
+    height: 8
+  }
+
+  Item {
     width: parent.width
-    implicitHeight: Math.max(bluetoothText.implicitHeight, bluetoothToggle.implicitHeight)
+    implicitHeight: Math.max(bluetoothText.implicitHeight, bluetoothToggle.implicitHeight) + 15
 
     Text {
       id: bluetoothText

@@ -5,23 +5,24 @@ import QtQuick
 import Quickshell.Wayland
 import Quickshell.Hyprland
 import "../SideBar/"
+import "../MainMenu/"
 
 Singleton {
-  property bool aboveWindows: false 
-
-  property bool hasTiledWindow: {
-    const ws = Hyprland.focusedMonitor?.activeWorkspace
-    if (!ws) return false
-    return ws.toplevels.values.some(w => !w.lastIpcObject?.floating)
-  }
-
-  property real borderClosure: hasTiledWindow? 1 : -1
-
   property bool sidebarsEnabled: true
 
   onSidebarsEnabledChanged: {
     SideBarState.leftOpen = false
     SideBarState.rightOpen = false
+  }
+
+  property int systemSectionIndex
+
+  property int visibleWorkspacesAmount: Math.max(4, ...Hyprland.workspaces.values.map((it) => { return it.id }))
+
+  property int mainMenuIndex: visibleWorkspacesAmount
+
+  onSystemSectionIndexChanged: {
+    MainMenuState.isMainMenuOpen = systemSectionIndex == mainMenuIndex
   }
 
 }
