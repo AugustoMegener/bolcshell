@@ -60,9 +60,11 @@ SideBar {
         }
       ]
     }
-
+  
     Rectangle {
       implicitHeight: 1
+
+      visible: SideBarState.rightOpen
 
       Layout.fillWidth: true
       Layout.leftMargin: -5

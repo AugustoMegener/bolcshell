@@ -1,12 +1,9 @@
 import Quickshell
 import QtQuick
-import Quickshell.Wayland
-import Quickshell.Services.SystemTray
 
 import "../MainMenu"
 import "../Theme"
-import "./PowerOption"
-import "../Components/PowerManager/"
+import "./PowerManager/"
 
 PanelWindow {
   id: modal

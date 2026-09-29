@@ -63,8 +63,9 @@ Scope {
       property real thickness: borderWindow.hasTiledWindow ? (borderWindow.width / 2) : 10.5
 
       Behavior on thickness {
+        enabled: borderWindow.hasTiledWindow
         NumberAnimation {
-          duration: 250
+          duration: borderWindow.hasTiledWindow?  250 : 0
           easing.type: Easing.InOutCubic
         }
       }
@@ -121,3 +122,4 @@ Scope {
     mask: Region {}
   }
 }
+

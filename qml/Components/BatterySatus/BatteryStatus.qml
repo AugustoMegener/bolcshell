@@ -33,9 +33,10 @@ Row {
 
     VectorImage {
       id: battery_icon_mask
+      visible: battery.batteryLow || UPower.displayDevice.state == UPowerDeviceState.Charging
       source: (battery.batteryLow ? "../../assets/icons/battery-warning-mask.svg" : (UPower.displayDevice.state == UPowerDeviceState.Charging ? "../../assets/icons/battery-charging-mask.svg" : ""))
       anchors.fill: parent
-      visible: false
+      
 
       preferredRendererType: VectorImage.CurveRenderer
     }
@@ -43,6 +44,9 @@ Row {
       anchors.fill: battery_icon_mask
       source: battery_icon_mask
       color: Theme.background
+
+      visible: battery.batteryLow || UPower.displayDevice.state == UPowerDeviceState.Charging
+      enabled: battery.batteryLow || UPower.displayDevice.state == UPowerDeviceState.Charging
     }
 
     VectorImage {
