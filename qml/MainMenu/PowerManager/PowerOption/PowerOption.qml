@@ -26,22 +26,25 @@ Button {
   }
 
 
-  Image {
-    id: icon
+  Item {
     width: 18
     height: 18
-    anchors.centerIn: parent
-    fillMode: Image.PreserveAspectFit
-    sourceSize.width: width
-    sourceSize.height: height
-    source: "../../../assets/icons/" + menuOption.iconPath
-
     opacity: 0.75
 
-    ColorOverlay {
+    Image {
+      id: icon
       anchors.fill: parent
-      color: Theme.text 
-      source: parent
+      visible: false
+      fillMode: Image.PreserveAspectFit
+      sourceSize.width: width
+      sourceSize.height: height
+      source: "../../../assets/icons/" + menuOption.iconPath
+    }
+
+    ColorOverlay {
+      anchors.fill: icon
+      source: icon
+      color: Theme.text
     }
   }
 }
