@@ -29,11 +29,11 @@ PanelWindow {
   color: "transparent"
 
   Component.onCompleted: {
-    Quickshell.execDetached(["hyprctl", "eval", "hl.curve('Linear', { type = 'bezier', points = { {0, 0}, {1, 1} } })"])
+    /*Quickshell.execDetached(["hyprctl", "eval", "hl.curve('Linear', { type = 'bezier', points = { {0, 0}, {1, 1} } })"])
     Quickshell.execDetached(["hyprctl", "eval", "hl.animation({ leaf = 'windows', enabled = false, speed = 0, curve = 'Linear' })"])
     Quickshell.execDetached(["hyprctl", "eval", "hl.animation({ leaf = 'windowsMove', enabled = false, speed = 0, curve = 'Linear' })"])
     Quickshell.execDetached(["hyprctl", "eval", "hl.layer_rule({ name = 'noanim_topbar', match = { namespace = 'topbar' } })"])
-    Quickshell.execDetached(["hyprctl", "eval", "hl.layer_rule({ name = 'noanim_topbar', no_anim = true })"])
+    Quickshell.execDetached(["hyprctl", "eval", "hl.layer_rule({ name = 'noanim_topbar', no_anim = true })"])*/
   }
 
   

@@ -46,7 +46,11 @@ Scope {
     mask: Region {}
     Component.onCompleted: {
       Hyprland.refreshToplevels()
-      Quickshell.execDetached(["hyprctl", "eval", "hl.layer_rule({ name = 'noanim_border', match = { namespace = 'border' }, no_anim = true })"])
+    /*Quickshell.execDetached(["hyprctl", "eval", "hl.curve('Linear', { type = 'bezier', points = { {0, 0}, {1, 1} } })"])
+    Quickshell.execDetached(["hyprctl", "eval", "hl.animation({ leaf = 'windows', enabled = false, speed = 0, curve = 'Linear' })"])
+    Quickshell.execDetached(["hyprctl", "eval", "hl.animation({ leaf = 'windowsMove', enabled = false, speed = 0, curve = 'Linear' })"])
+    Quickshell.execDetached(["hyprctl", "eval", "hl.animation({ leaf = 'layers', enabled = false, speed = 0, curve = 'Linear' })"])
+    Quickshell.execDetached(["hyprctl", "eval", "hl.layer_rule({ name = 'noanim_sidebar_left', match = { namespace = 'border' }, no_anim = true })"])*/
     }
 
 
@@ -75,14 +79,14 @@ Scope {
       property color borderColor: Theme.background
       property real innerThickness: 1
       property color innerColor: borderWindow.hasTiledWindow? "#2b2622" : "#3d332a"
-      property real shadowSize: 18
+      property real shadowSize: 15
       property color shadowColor: "#BF1f1910"
     }
 
     CRTFilter {}
   }
 
-  PanelWindow {
+  /*PanelWindow {
     WlrLayershell.namespace: "border-exclusion-top"
     WlrLayershell.exclusionMode: ExclusionMode.Normal
     screen: parent.screen
@@ -120,6 +124,6 @@ Scope {
     anchors { top: true; bottom: true; right: true }
     implicitWidth: snapInt(3)
     mask: Region {}
-  }
+  }*/
 }
 
