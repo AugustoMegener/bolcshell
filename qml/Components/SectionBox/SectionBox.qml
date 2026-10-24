@@ -72,19 +72,15 @@ ColumnLayout {
   }
 
 
-ScrollView {
-    id: contentScroll
 
+
+
+  StackLayout {
     Layout.fillWidth: true
     Layout.fillHeight: true
+    id: content
+    currentIndex: topTabBar.currentIndex
+    data: box.sections
 
-
-    StackLayout {
-        id: content
-        width: contentScroll.availableWidth
-        currentIndex: topTabBar.currentIndex
-        data: box.sections
-        
-    }
-}
+  }
 }

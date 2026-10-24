@@ -43,324 +43,355 @@ Column {
   }
 
 
-  Column {
+  ScrollView {
+    id: contentScroll
 
-    visible: Bluetooth.defaultAdapter.enabled
     anchors.left: parent.left
     anchors.right: parent.right
+    anchors.rightMargin: -8
+    anchors.top: bluetoothText.parent.bottom
+    anchors.bottom: parent.bottom
 
-    spacing: 10
+    clip: true
+    contentWidth: availableWidth
+    rightPadding: 12
 
-    Rectangle {
-      id: quickSetting
+
+    ScrollBar.vertical.policy: contentScroll.contentHeight > contentScroll.height
+        ? ScrollBar.AlwaysOn
+        : ScrollBar.AlwaysOff
+
+
+    ScrollBar.vertical.contentItem: Rectangle {
+        color: Theme.dim
+        opacity: 0.5
+        implicitWidth: 5
+        radius: 5
+      }
+
+
+    Column {
+
+      id: content
+
+      visible: Bluetooth.defaultAdapter.enabled
       anchors.left: parent.left
       anchors.right: parent.right
-      height: childrenRect.height
-      radius: 12
-      color: Theme.darkForeground
 
-      Column {
-        id: quickSettingsContent
+      spacing: 10
+
+
+      Rectangle {
+        id: quickSetting
         anchors.left: parent.left
         anchors.right: parent.right
-        anchors.margins: 20
+        height: childrenRect.height
+        radius: 12
+        color: Theme.darkForeground
 
-        bottomPadding: 10
-        spacing: 10
-
-        Item {
-          width: parent.width
-          height: 1
-        }
-
-        Item {
-          visible: deviceRepeater.count <= 0
+        Column {
+          id: quickSettingsContent
           anchors.left: parent.left
           anchors.right: parent.right
+          anchors.margins: 20
 
-          height: 50
+          bottomPadding: 10
+          spacing: 10
 
-          Text {
-            anchors.centerIn: parent
-
-            text: "No paired devices."
-            color: Theme.dim
-            font.pointSize: 14
-
-            horizontalAlignment: Text.AlignHCenter
+          Item {
+            width: parent.width
+            height: 1
           }
-        }
 
-        Repeater {
-          id: deviceRepeater
-          model: Bluetooth.devices.values.filter(i => i.paired)
-
-          Column {
-
-            id: device
-            required property int index
-            required property BluetoothDevice modelData
-
+          Item {
+            visible: deviceRepeater.count <= 0
             anchors.left: parent.left
             anchors.right: parent.right
 
-            spacing: 10
+            height: 50
 
-            Rectangle {
-              visible: device.index > 0
-              height: 1
-              width: parent.width
-              color: Theme.border
+            Text {
+              anchors.centerIn: parent
+
+              text: "No paired devices."
+              color: Theme.dim
+              font.pointSize: 14
+
+              horizontalAlignment: Text.AlignHCenter
             }
+          }
 
-            Item {
-              height: childrenRect.height
+          Repeater {
+            id: deviceRepeater
+            model: Bluetooth.devices.values.filter(i => i.paired)
+
+            Column {
+
+              id: device
+              required property int index
+              required property BluetoothDevice modelData
 
               anchors.left: parent.left
               anchors.right: parent.right
 
+              spacing: 10
 
-              Row {
-                anchors.left: parent.left
-                spacing: 5
-                Image {
-                  source: Quickshell.iconPath(device.modelData.icon) 
-
-                  width: 30
-                  fillMode: Image.PreserveAspectFit
-
-                  Component.onCompleted: {
-                    console.log(Quickshell.iconPath(device.modelData.icon))
-                  }
-                }
-                Column {
-                  id: deviceInfo
-                  Text {
-                    text: qsTr(device.modelData.name)
-                    color: Theme.text
-                    font.family: "Bricolage Grotesque"
-                    font.weight: Font.ExtraBold
-                  }
-
-                  Text {
-                    text: qsTr(
-                      BluetoothDeviceState.toString(device.modelData.state) + 
-                      (device.modelData.batteryAvailable? " -    %" + Math.round(device.modelData.battery * 100) : "")
-                    )
-
-                    color: Theme.dim
-                    font.pixelSize: 10
-                  }
-                }
-              }
-              Row {
-                anchors.right: parent.right
-                // anchors.rightMargin: -5
-                anchors.verticalCenter: parent.verticalCenter
-                ToolButton {
-                  id: deviceOptions
-                  anchors.verticalCenter: parent.verticalCenter
-                  width: 24
-                  height: 24
-                  padding: 0           // remove o padding padrão
-
-                  icon.source: "../../assets/icons/ellipsis-vertical.svg"
-                  icon.color: Theme.dim
-                  icon.width: 20
-                  icon.height: 20
-
-                  background: Item { }
-
-                  onClicked: deviceOptionsMenu.open()
-
-                  Menu {
-                    id: deviceOptionsMenu
-                    y: deviceOptions.height
-                    x: deviceOptions.width - (width / 2)
-                    width: 100
-                    height: 25
-
-                    MenuItem {
-                      text: "Forget"
-                      height: 25
-                      onTriggered: device.modelData.forget()
-                    }
-                  }
-                }
-                Toggle {
-
-                  anchors.verticalCenter: parent.verticalCenter
-                  checked: device.modelData.connected
-                  onClicked: device.modelData.connected = !device.modelData.connected
-
-                }
-              }
-            }
-
-          }
-        }
-
-      }
-    }
-
-    Item {
-      id: pairables
-
-      property bool open: false
-
-      width: parent.width
-      implicitHeight: pairablesLayout.implicitHeight
-
-      onOpenChanged: {
-        Bluetooth.defaultAdapter.discovering = open
-      }
-
-      Column {
-        id: pairablesLayout
-        anchors.left: parent.left
-        anchors.right: parent.right
-        spacing: 5
-
-        Text {
-          text: qsTr((pairables.open ? "▾" : "▸") + " Pair")
-          font.pixelSize: 13
-          font.family: "Bricolage Grotesque"
-          font.weight: Font.ExtraBold
-          color: Theme.text
-          anchors.left: parent.left
-          anchors.leftMargin: 20
-
-          MouseArea {
-            anchors.fill: parent
-            onClicked: pairables.open = !pairables.open
-          }
-        }
-
-        Rectangle {
-          visible: pairables.open
-          anchors.left: parent.left
-          anchors.leftMargin: 4
-          anchors.right: parent.right
-          implicitHeight: pairablesContent.implicitHeight + 20
-          radius: 12
-          color: Theme.darkForeground
-
-          Column {
-            id: pairablesContent
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.margins: 10
-            spacing: 10
-
-            Item {
-              height: 5
-              width: 1
-            }
-
-
-            Item {
-              visible: pairableRepeater.count <= 0
-              anchors.left: parent.left
-              anchors.right: parent.right
-
-              height: 50
-
-              Text {
-                anchors.centerIn: parent
-
-                text: "No device found."
-                color: Theme.dim
-                font.pointSize: 14
-
-                horizontalAlignment: Text.AlignHCenter
-              }
-            }
-
-            Repeater {
-              id: pairableRepeater
-              model: Bluetooth.devices.values.filter(i => !i.paired)
-
-              Column {
-                id: pairable
-                required property int index
-                required property BluetoothDevice modelData
-
+              Rectangle {
+                visible: device.index > 0
+                height: 1
                 width: parent.width
-                spacing: 10
+                color: Theme.border
+              }
 
-                Rectangle {
-                  visible: pairable.index > 0
-                  height: 1
-                  width: parent.width
-                  color: Theme.border
-                }
+              Item {
+                height: childrenRect.height
 
-                Item {
-                  width: parent.width
-                  implicitHeight: 20
+                anchors.left: parent.left
+                anchors.right: parent.right
 
-                  Row {
-                    anchors.left: parent.left
-                    anchors.verticalCenter: parent.verticalCenter
-                    spacing: 5
 
-                    Image {
-                      source: Quickshell.iconPath(pairable.modelData.icon)
-                      width: 20
-                      fillMode: Image.PreserveAspectFit
+                Row {
+                  anchors.left: parent.left
+                  spacing: 5
+                  Image {
+                    source: Quickshell.iconPath(device.modelData.icon) 
+
+                    width: 30
+                    fillMode: Image.PreserveAspectFit
+
+                    Component.onCompleted: {
+                      console.log(Quickshell.iconPath(device.modelData.icon))
                     }
-
+                  }
+                  Column {
+                    id: deviceInfo
                     Text {
-                      id: pairableInfo
-                      text: qsTr(pairable.modelData.name)
+                      text: qsTr(device.modelData.name)
                       color: Theme.text
                       font.family: "Bricolage Grotesque"
                       font.weight: Font.ExtraBold
-                      anchors.verticalCenter: parent.verticalCenter
                     }
 
                     Text {
-                      visible: pairable.modelData.pairing
-                      text: qsTr("Pairing...")
+                      text: qsTr(
+                        BluetoothDeviceState.toString(device.modelData.state) + 
+                        (device.modelData.batteryAvailable? " -    %" + Math.round(device.modelData.battery * 100) : "")
+                      )
+
                       color: Theme.dim
-                      anchors.verticalCenter: parent.verticalCenter
+                      font.pixelSize: 10
                     }
                   }
-
-                  Row {
-                    anchors.right: parent.right
+                }
+                Row {
+                  anchors.right: parent.right
+                  // anchors.rightMargin: -5
+                  anchors.verticalCenter: parent.verticalCenter
+                  ToolButton {
+                    id: deviceOptions
                     anchors.verticalCenter: parent.verticalCenter
+                    width: 24
+                    height: 24
+                    padding: 0           // remove o padding padrão
 
-                    Button {
+                    icon.source: "../../assets/icons/ellipsis-vertical.svg"
+                    icon.color: Theme.dim
+                    icon.width: 20
+                    icon.height: 20
 
-                      buttonWidth: pairButtonLabel.height + 9
+                    background: Item { }
 
-                      buttonHeight: buttonWidth
+                    onClicked: deviceOptionsMenu.open()
 
-                      backgroundColor: pairable.modelData.pairing? Theme.dangerButtonColor : Theme.mainButtonColor
+                    Menu {
+                      id: deviceOptionsMenu
+                      y: deviceOptions.height
+                      x: deviceOptions.width - (width / 2)
+                      width: 100
+                      height: 25
 
-                      buttonInsetShadowSize: 1
+                      MenuItem {
+                        text: "Forget"
+                        height: 25
+                        onTriggered: device.modelData.forget()
+                      }
+                    }
+                  }
+                  Toggle {
 
-                      onClicked: {
-                        if (pairable.modelData.pairing) {
-                          pairable.modelData.cancelPair()
-                        }
-                        else {
-                          pairable.modelData.trusted = true
-                          pairable.modelData.pair()
-                        }
+                    anchors.verticalCenter: parent.verticalCenter
+                    checked: device.modelData.connected
+                    onClicked: device.modelData.connected = !device.modelData.connected
+
+                  }
+                }
+              }
+
+            }
+          }
+
+        }
+      }
+
+      Item {
+        id: pairables
+
+        property bool open: false
+
+        width: parent.width
+        implicitHeight: pairablesLayout.implicitHeight
+
+        onOpenChanged: {
+          Bluetooth.defaultAdapter.discovering = open
+        }
+
+        Column {
+          id: pairablesLayout
+          anchors.left: parent.left
+          anchors.right: parent.right
+          spacing: 5
+
+          Text {
+            text: qsTr((pairables.open ? "▾" : "▸") + " Pair")
+            font.pixelSize: 13
+            font.family: "Bricolage Grotesque"
+            font.weight: Font.ExtraBold
+            color: Theme.text
+            anchors.left: parent.left
+            anchors.leftMargin: 20
+
+            MouseArea {
+              anchors.fill: parent
+              onClicked: pairables.open = !pairables.open
+            }
+          }
+
+          Rectangle {
+            visible: pairables.open
+            anchors.left: parent.left
+            anchors.leftMargin: 4
+            anchors.right: parent.right
+            implicitHeight: pairablesContent.implicitHeight + 20
+            radius: 12
+            color: Theme.darkForeground
+
+            Column {
+              id: pairablesContent
+              anchors.left: parent.left
+              anchors.right: parent.right
+              anchors.margins: 10
+              spacing: 10
+
+              Item {
+                height: 5
+                width: 1
+              }
+
+
+              Item {
+                visible: pairableRepeater.count <= 0
+                anchors.left: parent.left
+                anchors.right: parent.right
+
+                height: 50
+
+                Text {
+                  anchors.centerIn: parent
+
+                  text: "No device found."
+                  color: Theme.dim
+                  font.pointSize: 14
+
+                  horizontalAlignment: Text.AlignHCenter
+                }
+              }
+
+              Repeater {
+                id: pairableRepeater
+                model: Bluetooth.devices.values.filter(i => !i.paired)
+
+                Column {
+                  id: pairable
+                  required property int index
+                  required property BluetoothDevice modelData
+
+                  width: parent.width
+                  spacing: 10
+
+                  Rectangle {
+                    visible: pairable.index > 0
+                    height: 1
+                    width: parent.width
+                    color: Theme.border
+                  }
+
+                  Item {
+                    width: parent.width
+                    implicitHeight: 20
+
+                    Row {
+                      anchors.left: parent.left
+                      anchors.verticalCenter: parent.verticalCenter
+                      spacing: 5
+
+                      Image {
+                        source: Quickshell.iconPath(pairable.modelData.icon)
+                        width: 20
+                        fillMode: Image.PreserveAspectFit
                       }
 
+                      Text {
+                        id: pairableInfo
+                        text: qsTr(pairable.modelData.name)
+                        color: Theme.text
+                        font.family: "Bricolage Grotesque"
+                        font.weight: Font.ExtraBold
+                        anchors.verticalCenter: parent.verticalCenter
+                      }
 
                       Text {
-                        id: pairButtonLabel
-                        text: pairable.modelData.pairing? qsTr("󰜺 ") : qsTr(" ")
+                        visible: pairable.modelData.pairing
+                        text: qsTr("Pairing...")
+                        color: Theme.dim
+                        anchors.verticalCenter: parent.verticalCenter
+                      }
+                    }
 
-                        anchors.centerIn: parent
+                    Row {
+                      anchors.right: parent.right
+                      anchors.verticalCenter: parent.verticalCenter
 
-                        font.pointSize: 8
-                        font.weight: Font.Bold
-                        color: Theme.text
+                      Button {
+
+                        buttonWidth: pairButtonLabel.height + 9
+
+                        buttonHeight: buttonWidth
+
+                        backgroundColor: pairable.modelData.pairing? Theme.dangerButtonColor : Theme.mainButtonColor
+
+                        buttonInsetShadowSize: 1
+
+                        onClicked: {
+                          if (pairable.modelData.pairing) {
+                            pairable.modelData.cancelPair()
+                          }
+                          else {
+                            pairable.modelData.trusted = true
+                            pairable.modelData.pair()
+                          }
+                        }
+
+
+                        Text {
+                          id: pairButtonLabel
+                          text: pairable.modelData.pairing? qsTr("󰜺 ") : qsTr(" ")
+
+                          anchors.centerIn: parent
+
+                          font.pointSize: 8
+                          font.weight: Font.Bold
+                          color: Theme.text
+                        }
                       }
                     }
                   }

@@ -42,9 +42,9 @@ SideBar {
       visible: SideBarState.rightOpen
 
       tabBarSizeOffset: toggle.width 
-      Layout.preferredHeight: parent.height / 2
+      Layout.preferredHeight: parent.height / 3
 
-      Layout.maximumHeight: parent.height / 2
+      Layout.maximumHeight: parent.height / 3
       Layout.fillWidth: true
 
       sections: [
@@ -77,7 +77,9 @@ SideBar {
 
       visible: SideBarState.rightOpen
       Layout.fillWidth: true
-      Layout.fillHeight: true
+      Layout.preferredHeight: parent.height / 3 * 2
+
+      Layout.maximumHeight: parent.height / 3 * 2
 
       sections: [
         NotificationMenu {

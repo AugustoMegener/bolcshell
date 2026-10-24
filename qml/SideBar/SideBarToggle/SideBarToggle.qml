@@ -1,6 +1,8 @@
 import QtQuick
 import "../../Theme"
 import ".."
+
+import "../../Services/NotificationStatus/"
 import "../../ShellState"
 
 Item {
@@ -39,6 +41,33 @@ Item {
 
       Behavior on width {
         NumberAnimation { duration: 200 }
+      }
+    }
+
+    Rectangle {
+      visible: sideBarToggle.side == "right" && NotificationStatus.trackedNotifications.values.length > 0
+
+      anchors.right: parent.right
+      anchors.top: parent.top
+      anchors.rightMargin: -width / 3
+      anchors.topMargin: -height / 3
+
+      width: 12
+      height: 12
+      radius: 6
+
+      color: Theme.background
+
+      Rectangle {
+
+        anchors.centerIn: parent
+
+
+        width: 6
+        height: 6
+        radius: 3
+
+        color: Theme.activeAltColor
       }
     }
 

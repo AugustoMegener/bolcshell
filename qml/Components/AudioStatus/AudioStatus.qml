@@ -14,6 +14,9 @@ Item {
 
     anchors.fill: parent
     preferredRendererType: VectorImage.CurveRenderer
+
+    antialiasing: true
+    smooth: false 
   }
 
   ColorOverlay {

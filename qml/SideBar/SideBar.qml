@@ -50,12 +50,6 @@ PanelWindow {
 
   property real animatedZone: targetZone
 
-  Behavior on animatedZone {
-    NumberAnimation {
-      duration: 250
-      easing.type: Easing.InOutQuad
-    }
-  }
 
   implicitWidth: side == "left" ? snap(SideBarState.leftWidth) : snap(SideBarState.rightWidth)
 
