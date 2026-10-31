@@ -56,6 +56,10 @@ Singleton {
   readonly property color mainButtonColor: "#5a4533"
   readonly property color dangerButtonColor: "#e02f29"
 
+  readonly property color breadcumbColor: "#917959"
+ readonly property color fileHeaderTitleColor: "#ab916d"
+ readonly property color breadcrumbSeparatorColor: "#3b3026"
+ 
   readonly property int fontSize: 14
 
 

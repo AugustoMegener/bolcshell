@@ -10,10 +10,11 @@ import "./SideBar/SideBarLeft"
 import "./SideBar/SideBarRight"
 import "./MainMenu/"
 import "./DynamicIsland/"
-import "./Services/NotificationStatus/"
 
 ShellRoot { 
   id: root 
+
+
 
 
   MainMenuShortcut {} 

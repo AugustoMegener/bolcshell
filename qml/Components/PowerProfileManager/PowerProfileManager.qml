@@ -32,6 +32,7 @@ Column {
 
       Dropdown {
         buttonWidth: 130
+        implicitWidth: buttonWidth
         textRole: "text"
         valueRole: "value"
         model: [

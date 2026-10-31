@@ -5,8 +5,8 @@ import "../../Theme/"
 
 ComboBox {
   id: root
-  
-  required property real buttonWidth
+
+  property real buttonWidth: root.width
   property real buttonHeight: 32
   property real buttonInsetShadowSize: 2
   property real cornerRadius: 8
@@ -21,7 +21,7 @@ ComboBox {
 
   signal selected()
 
-  implicitWidth: root.buttonWidth
+  implicitWidth: 200
   implicitHeight: root.buttonHeight
 
   background: Item {
@@ -56,7 +56,7 @@ ComboBox {
       property real radiusTopRight: root.radiusTopRight
       property real radiusBottomRight: root.radiusBottomRight
       property real radiusBottomLeft: root.radiusBottomLeft
-      fragmentShader: "../../assets/shaders/button.frag.qsb"
+      fragmentShader: Qt.resolvedUrl("../../assets/shaders/button.frag.qsb")
     }
   }
 

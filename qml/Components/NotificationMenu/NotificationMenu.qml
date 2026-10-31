@@ -239,8 +239,8 @@ Column {
 
               padding: 5 
               spacing: 5
-              TextField {
-                id: replyTextField
+              TextInput {
+                id: replyTextInput
                 implicitWidth: parent.width - sendReplyButton.width - parent.padding * 3
                 placeholderText: notification.modelData.inlineReplyPlaceholder
               }
@@ -251,7 +251,7 @@ Column {
                 buttonWidth: buttonHeight
 
                 onClicked: {
-                  notification.modelData.sendInlineReply(replyTextField.text)
+                  notification.modelData.sendInlineReply(replyTextInput.text)
                 }
 
                 Image {
