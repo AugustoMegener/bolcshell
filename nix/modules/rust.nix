@@ -39,6 +39,11 @@
         export QML2_IMPORT_PATH="${qmlImportPath}:$QML2_IMPORT_PATH"
         exec ${qs}/bin/quickshell -p ${./../../qml} "$@"
       '';
+      packages.bolcshell-greeter = pkgs.writeShellScriptBin "bolcshell-greeter" ''
+        export PATH="${self'.packages.bolcshell-server}/bin:$PATH"
+        export QML2_IMPORT_PATH="${qmlImportPath}:$QML2_IMPORT_PATH"
+        exec ${qs}/bin/quickshell -p ${./../../qml/greetd.qml} "$@"
+      '';
       packages.default = self'.packages.bolcshell;
     };
 }
