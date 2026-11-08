@@ -25,10 +25,12 @@ ShellRoot {
     color: Theme.background
 
 
-    Column {
+    Row {
       anchors.horizontalCenter: parent.horizontalCenter
       anchors.top: parent.top
-      anchors.margins: 10
+      anchors.margins: 15
+
+      spacing: 10
 
 
       SystemClock {
@@ -40,8 +42,8 @@ ShellRoot {
         spacing: 4
 
         Item {
-          width: 20
-          height: 20
+          width: 19
+          height: 19
           anchors.verticalCenter: parent.verticalCenter
 
           Image {
@@ -61,7 +63,7 @@ ShellRoot {
           text: Qt.formatDateTime(clock.date, "yyyy·MM·dd")
 
           color: Theme.dim
-          font.pixelSize: 19
+          font.pixelSize: 18
         }
       }
 
@@ -69,8 +71,8 @@ ShellRoot {
         spacing: 4
 
         Item {
-          width: 20
-          height: 20
+          width: 19
+          height: 19
           anchors.verticalCenter: parent.verticalCenter
 
           Image {
@@ -92,7 +94,7 @@ ShellRoot {
           text: Qt.formatDateTime(clock.date, "h'h'mm")
 
           color: Theme.dim
-          font.pixelSize: 19
+          font.pixelSize: 18
         }
       }
     }
@@ -111,8 +113,6 @@ ShellRoot {
       radius: 12
       color: Theme.foreground
       border.color: Theme.border
-
-      opacity: 0
 
       simple: true
     }

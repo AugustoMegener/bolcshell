@@ -44,7 +44,7 @@ Rectangle {
       buttonRadius: 12
       command: "hyprshutdown --post-cmd 'systemctl poweroff'"
 
-      hasRadiusRight: !root.simple
+      hasRadiusRight: root.simple
     }
 
     PowerOption {
