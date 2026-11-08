@@ -15,6 +15,8 @@ import "./Theme/"
 ShellRoot {
   PanelWindow {
 
+    focusable: true
+
     anchors {
       top: true
       bottom: true
