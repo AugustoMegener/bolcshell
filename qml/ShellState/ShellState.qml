@@ -92,7 +92,7 @@ Singleton {
 
   FileView {
     id: sessionFile
-    path: root.selectedSessionIndex >= 0 ? foundSessions.get(root.selectedSessionIndex).sessionPath : ""
+    path: root.selectedSessionIndex >= 0 && root.selectedSessionIndex < foundSessions.count ? foundSessions.get(root.selectedSessionIndex).sessionPath : ""
   }
 
 }
