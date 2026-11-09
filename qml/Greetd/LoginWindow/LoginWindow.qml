@@ -150,7 +150,7 @@ Column {
         visible: Greetd.state == GreetdState.Inactive
 
         Component.onCompleted: {
-          if (Greetd.state == GreetdState.Inactive && !ShellState.cache.lastGreeterUser && ShellState.cache.lastGreeterSession) {
+          if (Greetd.state == GreetdState.Inactive && ShellState.cache.lastGreeterUser && ShellState.cache.lastGreeterSession) {
             Greetd.createSession(ShellState.cache.lastGreeterUser)
           }
         }

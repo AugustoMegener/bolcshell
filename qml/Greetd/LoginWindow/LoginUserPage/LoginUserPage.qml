@@ -141,7 +141,7 @@ Column {
       ShellState.cache.lastGreeterUser = root.typedUser
       ShellState.cache.lastGreeterSession = root.sessionOptions[ShellState.selectedSessionIndex]?.value ?? ""
 
-      if (Greetd.state == GreetdState.Inactive && !ShellState.cache.lastGreeterUser && ShellState.cache.lastGreeterSession) {
+      if (Greetd.state == GreetdState.Inactive && ShellState.cache.lastGreeterUser && ShellState.cache.lastGreeterSession) {
 
         Greetd.createSession(ShellState.cache.lastGreeterUser)
       }
