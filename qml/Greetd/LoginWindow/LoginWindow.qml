@@ -212,7 +212,7 @@ Column {
     target: Greetd
 
     function onReadyToLaunch() {
-      Greetd.launch([ShellState.selectedSessionExec])
+      Greetd.launch(["systemd-cat", "-t", "session", ShellState.selectedSessionExec])
     }
   }
 }
