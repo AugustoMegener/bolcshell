@@ -212,7 +212,7 @@ Column {
     target: Greetd
 
     function onReadyToLaunch() {
-      Greetd.launch(["gio", "launch", ShellState.selectedSessionPath])
+      Greetd.launch([ShellState.selectedSessionExec])
     }
   }
 }

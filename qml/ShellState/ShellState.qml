@@ -50,6 +50,11 @@ Singleton {
 
   readonly property string selectedSessionPath: sessionFile.path
 
+  readonly property string selectedSessionExec: {
+    const match = /^Exec=(.*)$/m.exec(sessionFile.text())
+    return match ? match[1].trim() : ""
+  }
+
   readonly property var sessionDirs: (Quickshell.env("XDG_DATA_DIRS") || "/usr/local/share:/usr/share")
     .split(":")
     .filter(dir => dir.length > 0)
