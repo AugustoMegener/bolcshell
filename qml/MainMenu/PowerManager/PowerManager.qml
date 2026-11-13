@@ -30,7 +30,7 @@ Rectangle {
       buttonWidth: content.optionSize
       buttonHeight: content.optionSize
       buttonRadius: 12
-      command: "hyprshutdown --post-cmd 'systemctl reboot'"
+      command: root.simple? "systemctl reboot" : "hyprshutdown --post-cmd 'systemctl reboot'" 
     }
 
     PowerOption {
@@ -42,7 +42,7 @@ Rectangle {
       buttonWidth: content.optionSize
       buttonHeight: content.optionSize
       buttonRadius: 12
-      command: "hyprshutdown --post-cmd 'systemctl poweroff'"
+      command: root.simple? "systemctl poweroff" : "hyprshutdown --post-cmd 'systemctl poweroff'"
 
       hasRadiusRight: root.simple
     }
