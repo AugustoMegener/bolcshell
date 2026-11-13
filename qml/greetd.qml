@@ -8,7 +8,6 @@ import Qt5Compat.GraphicalEffects
 
 import "./Theme"
 import "./Greetd/LoginWindow/"
-
 import "./ShellState/"
 import Quickshell.Services.Greetd 
 import "./MainMenu/PowerManager/"
@@ -18,10 +17,10 @@ ShellRoot {
 
   Component.onCompleted: {
 
-      if (Greetd.state == GreetdState.Inactive && ShellState.cache.lastGreeterUser && ShellState.cache.lastGreeterSession) {
+    if (Greetd.state == GreetdState.Inactive && ShellState.cache.lastGreeterUser && ShellState.cache.lastGreeterSession) {
 
-        Greetd.createSession(ShellState.cache.lastGreeterUser)
-      }
+      Greetd.createSession(ShellState.cache.lastGreeterUser)
+    }
   }
 
   PanelWindow {
@@ -51,6 +50,7 @@ ShellRoot {
 
 
     Row {
+      id: timestamp
       spacing: 10
 
       anchors.horizontalCenter: parent.horizontalCenter
@@ -141,6 +141,7 @@ ShellRoot {
 
 
     LoginWindow {
+      id: loginWindow
       anchors.centerIn: parent
       width: 100
 
@@ -201,5 +202,18 @@ ShellRoot {
 
       simple: true
     }
+
+    Connections {
+      target: Greetd
+
+      function onLaunched() {
+        parent.color = "black"
+        timestamp.anchors.topMargin = -timestamp.anchors.height
+        loginWindow.width = 100
+        loginWindow.opacity = 0
+        card.anchors.bottomMargin = -card.height
+      }
+    }
   }
+
 }
