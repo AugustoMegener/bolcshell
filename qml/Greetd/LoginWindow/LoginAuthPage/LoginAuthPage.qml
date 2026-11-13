@@ -44,8 +44,10 @@ Column {
       Rectangle {
         width: 60
         height: 60
-        radius:  11 // width / 2
+        radius:  11 // width / 2 
         color: userCard.highlightColor
+
+        visible: photo.status !== Image.Error 
 
         Image {
           id: photo
@@ -99,7 +101,7 @@ Column {
 
       VectorImage {
         id: logOutIcon
-        source: "../../assets/icons/log-out.svg"
+        source: "../../../assets/icons/log-out.svg"
         preferredRendererType: VectorImage.CurveRenderer
         anchors.fill: parent
         visible: false
@@ -109,6 +111,16 @@ Column {
         anchors.fill: logOutIcon
         source: logOutIcon
         color: Theme.dim
+      }
+
+
+      MouseArea {
+        anchors.fill: parent
+        cursorShape: Qt.PointingHandCursor
+        enabled: visible
+        onPressed: {
+          Greetd.cancelSession()
+        }
       }
     }
   }
@@ -136,7 +148,7 @@ Column {
 
       VectorImage {
         id: pwdIcon
-        source: "../../assets/icons/key-round.svg"
+        source: "../../../assets/icons/key-round.svg"
         preferredRendererType: VectorImage.CurveRenderer
         anchors.fill: parent
       }

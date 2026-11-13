@@ -24,16 +24,43 @@ ShellRoot {
       right: true
     }
 
-    color: Theme.background
+    color: "black"
+
+    Behavior on color {
+      ColorAnimation {
+        from: "black"
+        to: Theme.background
+        duration: 350
+      }
+    }
+
+    Component.onCompleted: {
+      color = Theme.background
+    }
 
 
     Row {
+      spacing: 10
+
       anchors.horizontalCenter: parent.horizontalCenter
       anchors.top: parent.top
       anchors.margins: 15
 
-      spacing: 10
+      anchors.topMargin: -height
 
+
+
+
+      Behavior on anchors.topMargin {
+        NumberAnimation {
+          duration: 350
+          easing.type: Easing.InOutQuad
+        }
+      }
+
+      Component.onCompleted: {
+        anchors.topMargin = 15
+      }
 
       SystemClock {
         id: clock
@@ -101,7 +128,41 @@ ShellRoot {
       }
     }
 
-    LoginWindow {}
+
+    LoginWindow {
+      anchors.centerIn: parent
+      width: 100
+
+      opacity: 0
+
+      Behavior on width {
+        NumberAnimation {
+          duration: 350
+          easing.type: Easing.InOutQuad
+        }
+      }
+
+      Behavior on height {
+        NumberAnimation {
+          duration: 35
+          easing.type: Easing.InOutQuad
+        }
+      }
+
+
+      Behavior on opacity {
+        NumberAnimation {
+          duration: 350
+          easing.type: Easing.InOutQuad
+        }
+      }
+
+      Component.onCompleted: {
+        width = 450
+        opacity = 1
+      }
+
+    }
 
     PowerManager {
       id: card
@@ -109,8 +170,19 @@ ShellRoot {
 
       anchors.bottom: parent.bottom
       anchors.horizontalCenter: parent.horizontalCenter
-      anchors.bottomMargin: 10
 
+      anchors.bottomMargin: -height
+
+      Behavior on anchors.bottomMargin {
+        NumberAnimation {
+          duration: 350
+          easing.type: Easing.InOutQuad
+        }
+      }
+
+      Component.onCompleted: {
+        anchors.bottomMargin = 15
+      }
 
       radius: 12
       color: Theme.foreground

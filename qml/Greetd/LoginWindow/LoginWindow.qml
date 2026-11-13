@@ -16,9 +16,6 @@ import Quickshell.Services.Greetd
 Column {
   id: root
 
-  anchors.centerIn: parent
-
-  width: 450
 
 
   Rectangle {
@@ -72,7 +69,16 @@ Column {
               ColorOverlay {
                 anchors.fill: backIcon
                 source: backIcon
-                color: Theme.breadcumbColor
+                color: Greetd.state == GreetdState.Authenticating? "#483D2E" : "#866F51"
+              }
+
+              MouseArea {
+                anchors.fill: parent
+                cursorShape: Qt.PointingHandCursor
+                enabled: visible
+                onPressed: {
+                  Greetd.cancelSession()
+                }
               }
             }
 
@@ -92,7 +98,7 @@ Column {
               ColorOverlay {
                 anchors.fill: fowardIcon
                 source: fowardIcon
-                color: Theme.breadcumbColor
+                color: "#483D2E"
               }
             }
           }
@@ -147,7 +153,7 @@ Column {
       LoginUserPage {
         id: loginUserPage
 
-        visible: Greetd.state == GreetdState.Inactive
+        visible: false //Greetd.state == GreetdState.Inactive
 
         Component.onCompleted: {
           if (Greetd.state == GreetdState.Inactive && ShellState.cache.lastGreeterUser && ShellState.cache.lastGreeterSession) {
@@ -159,7 +165,7 @@ Column {
 
       LoginAuthPage {
         id: loginAuthPage
-        visible: Greetd.state == GreetdState.Authenticating
+        visible: true // Greetd.state == GreetdState.Authenticating || Greetd.state == GreetdState.ReadyToLaunch
       }
 
       Column {
