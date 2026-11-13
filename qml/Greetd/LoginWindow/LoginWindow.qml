@@ -17,7 +17,6 @@ Column {
   id: root
 
 
-
   Rectangle {
     width: parent.width
     height: content.implicitHeight
@@ -153,7 +152,7 @@ Column {
       LoginUserPage {
         id: loginUserPage
 
-        visible: false //Greetd.state == GreetdState.Inactive
+        visible: Greetd.state == GreetdState.Inactive
 
         Component.onCompleted: {
           if (Greetd.state == GreetdState.Inactive && ShellState.cache.lastGreeterUser && ShellState.cache.lastGreeterSession) {
@@ -165,7 +164,7 @@ Column {
 
       LoginAuthPage {
         id: loginAuthPage
-        visible: true // Greetd.state == GreetdState.Authenticating || Greetd.state == GreetdState.ReadyToLaunch
+        visible: Greetd.state == GreetdState.Authenticating || Greetd.state == GreetdState.ReadyToLaunch
       }
 
       Column {

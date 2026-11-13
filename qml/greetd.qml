@@ -9,10 +9,21 @@ import Qt5Compat.GraphicalEffects
 import "./Theme"
 import "./Greetd/LoginWindow/"
 
+import "./ShellState/"
+import Quickshell.Services.Greetd 
 import "./MainMenu/PowerManager/"
 import "./Theme/"
 
 ShellRoot {
+
+  Component.onCompleted: {
+
+      if (Greetd.state == GreetdState.Inactive && ShellState.cache.lastGreeterUser && ShellState.cache.lastGreeterSession) {
+
+        Greetd.createSession(ShellState.cache.lastGreeterUser)
+      }
+  }
+
   PanelWindow {
 
     focusable: true
