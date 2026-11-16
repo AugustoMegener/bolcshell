@@ -217,7 +217,15 @@ Column {
     target: Greetd
 
     function onReadyToLaunch() {
-      Greetd.launch(["systemd-cat", "-t", "session", ShellState.selectedSessionExec])
+      launch.running = true
     }
+  }
+
+
+  Timer {
+    id: launch
+    interval: 400
+    running: false
+    onTriggered: Greetd.launch(["systemd-cat", "-t", "session", ShellState.selectedSessionExec])
   }
 }

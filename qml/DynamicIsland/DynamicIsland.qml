@@ -3,6 +3,7 @@ import QtQuick
 import Quickshell.Wayland
 import "../Theme"
 import "../MainMenu/"
+import "../ShellState"
 import "."
 import Qt5Compat.GraphicalEffects
 
@@ -22,14 +23,17 @@ PanelWindow {
         radius: 16
         width: 50
         height: 50
-        /*layer.enabled: true
-        layer.effect: DropShadow {
-            horizontalOffset: 0
-            verticalOffset: 4
-            radius: 16
-            samples: 33
-            color: "#80000000"
-          }*/
+
+        anchors.top: parent.top
+
+        anchors.topMargin: ShellState.started? 0 : -height
+
+        Behavior on anchors.topMargin {
+            NumberAnimation {
+                duration: 250
+                easing.type: Easing.InOutQuad
+            }
+        }
 
         state: DynamicIslandState.state
 
@@ -43,8 +47,8 @@ PanelWindow {
                 name: DynamicIslandState.State.MainModding
                 PropertyChanges {
                   target: islandRect;
-                  width: 50; 
-                  radius: 50; 
+                  width: 50;
+                  radius: 50;
                   color: Theme.activeAltLightColor
                   layer.effect: null
                 }

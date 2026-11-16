@@ -13,6 +13,16 @@ import Qt.labs.folderlistmodel
 Singleton {
   id: root 
 
+  property bool started: false
+
+  Timer {
+    interval: 2000
+    running: true
+    repeat: false
+
+    onTriggered: root.started = true
+  }
+  
   property bool sidebarsEnabled: true
 
   onSidebarsEnabledChanged: {
@@ -38,7 +48,7 @@ Singleton {
     onAdapterUpdated: writeAdapter()
     onLoadFailed: error => {
       if (error == FileViewError.FileNotFound)
-        writeAdapter()
+      writeAdapter()
     }
     adapter: JsonAdapter {
       property string lastGreeterUser: ""
@@ -56,9 +66,9 @@ Singleton {
   }
 
   readonly property var sessionDirs: (Quickshell.env("XDG_DATA_DIRS") || "/usr/local/share:/usr/share")
-    .split(":")
-    .filter(dir => dir.length > 0)
-    .map(dir => dir + "/wayland-sessions")
+  .split(":")
+  .filter(dir => dir.length > 0)
+  .map(dir => dir + "/wayland-sessions")
 
   function collectSessions() {
     foundSessions.clear()
@@ -68,7 +78,7 @@ Singleton {
       for (let j = 0; j < scanner.count; j++) {
         const fileName = scanner.get(j, "fileName")
         if (seen.has(fileName))
-          continue
+        continue
         seen.add(fileName)
         foundSessions.append({ sessionPath: scanner.get(j, "filePath") })
       }

@@ -20,6 +20,7 @@ Scope {
     return Math.round(target)
   }
 
+
   PanelWindow {
     id: borderWindow
 
@@ -46,84 +47,103 @@ Scope {
     mask: Region {}
     Component.onCompleted: {
       Hyprland.refreshToplevels()
-    /*Quickshell.execDetached(["hyprctl", "eval", "hl.curve('Linear', { type = 'bezier', points = { {0, 0}, {1, 1} } })"])
-    Quickshell.execDetached(["hyprctl", "eval", "hl.animation({ leaf = 'windows', enabled = false, speed = 0, curve = 'Linear' })"])
-    Quickshell.execDetached(["hyprctl", "eval", "hl.animation({ leaf = 'windowsMove', enabled = false, speed = 0, curve = 'Linear' })"])
-    Quickshell.execDetached(["hyprctl", "eval", "hl.animation({ leaf = 'layers', enabled = false, speed = 0, curve = 'Linear' })"])
-    Quickshell.execDetached(["hyprctl", "eval", "hl.layer_rule({ name = 'noanim_sidebar_left', match = { namespace = 'border' }, no_anim = true })"])*/
+      /*Quickshell.execDetached(["hyprctl", "eval", "hl.curve('Linear', { type = 'bezier', points = { {0, 0}, {1, 1} } })"])
+       Quickshell.execDetached(["hyprctl", "eval", "hl.animation({ leaf = 'windows', enabled = false, speed = 0, curve = 'Linear' })"])
+       Quickshell.execDetached(["hyprctl", "eval", "hl.animation({ leaf = 'windowsMove', enabled = false, speed = 0, curve = 'Linear' })"])
+       Quickshell.execDetached(["hyprctl", "eval", "hl.animation({ leaf = 'layers', enabled = false, speed = 0, curve = 'Linear' })"])
+       Quickshell.execDetached(["hyprctl", "eval", "hl.layer_rule({ name = 'noanim_sidebar_left', match = { namespace = 'border' }, no_anim = true })"])*/
+     }
+
+
+     property bool hasTiledWindow: {
+       const ws = Hyprland.focusedMonitor?.activeWorkspace
+       if (!ws) return false
+       return ws.toplevels.values.some(w => !w.lastIpcObject?.floating)
+     }
+
+     ShaderEffect {
+       id: shader
+       anchors.fill: parent
+       enabled: false
+       fragmentShader: Qt.resolvedUrl("../assets/shaders/border.frag.qsb")
+
+       property real thickness: borderWindow.width / 2
+       property real innerRadius: borderWindow.height / 2 // 12
+       property real w: width
+       property real h: height
+       property color borderColor: Theme.background
+       property real innerThickness: 1
+       property color innerColor: borderWindow.hasTiledWindow? "#2b2622" : "#3d332a"
+       property real shadowSize: 15
+       property color shadowColor: "#BF1f1910"
+
+       states: State {
+         name: "open"
+         when: !borderWindow.hasTiledWindow && ShellState.started
+
+         PropertyChanges {
+           target: shader
+           thickness: 10.5
+           innerRadius: 12
+         }
+       }
+
+       transitions: Transition {
+         NumberAnimation {
+           property: "thickness"
+           duration: 250
+           easing.type: Easing.InOutCubic
+         }
+
+         NumberAnimation {
+           property: "innerRadius"
+           duration: 500
+           easing.type: Easing.InOutCubic
+         }
+       }
+     }
+
+     CRTFilter {}
+   }
+
+   /*PanelWindow {
+      WlrLayershell.namespace: "border-exclusion-top"
+      WlrLayershell.exclusionMode: ExclusionMode.Normal
+      screen: parent.screen
+      color: "transparent"
+      anchors { top: true; left: true; right: true }
+      implicitHeight: snapInt(3)
+      mask: Region {}
     }
 
-
-  property bool hasTiledWindow: {
-    const ws = Hyprland.focusedMonitor?.activeWorkspace
-    if (!ws) return false
-    return ws.toplevels.values.some(w => !w.lastIpcObject?.floating)
-  }
-
-    ShaderEffect {
-      anchors.fill: parent
-      enabled: false
-      fragmentShader: Qt.resolvedUrl("../assets/shaders/border.frag.qsb")
-      property real thickness: borderWindow.hasTiledWindow ? (borderWindow.width / 2) : 10.5
-
-      Behavior on thickness {
-        enabled: borderWindow.hasTiledWindow
-        NumberAnimation {
-          duration: borderWindow.hasTiledWindow?  250 : 0
-          easing.type: Easing.InOutCubic
-        }
-      }
-      property real innerRadius: 12
-      property real w: width
-      property real h: height
-      property color borderColor: Theme.background
-      property real innerThickness: 1
-      property color innerColor: borderWindow.hasTiledWindow? "#2b2622" : "#3d332a"
-      property real shadowSize: 15
-      property color shadowColor: "#BF1f1910"
+    PanelWindow {
+      WlrLayershell.namespace: "border-exclusion-bottom"
+      WlrLayershell.exclusionMode: ExclusionMode.Normal
+      screen: parent.screen
+      color: "transparent"
+      anchors { bottom: true; left: true; right: true }
+      implicitHeight: snapInt(3)
+      mask: Region {}
     }
 
-    CRTFilter {}
-  }
+    PanelWindow {
+      WlrLayershell.namespace: "border-exclusion-left"
+      WlrLayershell.exclusionMode: ExclusionMode.Normal
+      screen: parent.screen
+      color: "transparent"
+      anchors { top: true; bottom: true; left: true }
+      implicitWidth: snapInt(3)
+      mask: Region {}
+    }
 
-  /*PanelWindow {
-    WlrLayershell.namespace: "border-exclusion-top"
-    WlrLayershell.exclusionMode: ExclusionMode.Normal
-    screen: parent.screen
-    color: "transparent"
-    anchors { top: true; left: true; right: true }
-    implicitHeight: snapInt(3)
-    mask: Region {}
+    PanelWindow {
+      WlrLayershell.namespace: "border-exclusion-right"
+      WlrLayershell.exclusionMode: ExclusionMode.Normal
+      screen: parent.screen
+      color: "transparent"
+      anchors { top: true; bottom: true; right: true }
+      implicitWidth: snapInt(3)
+      mask: Region {}
+    }*/
   }
-
-  PanelWindow {
-    WlrLayershell.namespace: "border-exclusion-bottom"
-    WlrLayershell.exclusionMode: ExclusionMode.Normal
-    screen: parent.screen
-    color: "transparent"
-    anchors { bottom: true; left: true; right: true }
-    implicitHeight: snapInt(3)
-    mask: Region {}
-  }
-
-  PanelWindow {
-    WlrLayershell.namespace: "border-exclusion-left"
-    WlrLayershell.exclusionMode: ExclusionMode.Normal
-    screen: parent.screen
-    color: "transparent"
-    anchors { top: true; bottom: true; left: true }
-    implicitWidth: snapInt(3)
-    mask: Region {}
-  }
-
-  PanelWindow {
-    WlrLayershell.namespace: "border-exclusion-right"
-    WlrLayershell.exclusionMode: ExclusionMode.Normal
-    screen: parent.screen
-    color: "transparent"
-    anchors { top: true; bottom: true; right: true }
-    implicitWidth: snapInt(3)
-    mask: Region {}
-  }*/
-}
 

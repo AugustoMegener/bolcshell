@@ -34,10 +34,12 @@ PanelWindow {
         cardTranslate.y = 40
         cardOpenAnim.start()
         borderShader.thickness = modal.height * 1.05
+        borderShader.innerRadius = modal.height * 1.05 / 2
       } else {
         cardOpenAnim.stop()
         cardCloseAnim.start()
         borderShader.thickness = 10.5
+        borderShader.innerRadius = 12
       }
     }
 
@@ -50,6 +52,13 @@ PanelWindow {
       property real thickness: 10.5
 
       Behavior on thickness {
+        NumberAnimation {
+          duration: 250
+          easing.type: Easing.InOutCubic
+        }
+      }
+
+      Behavior on innerRadius {
         NumberAnimation {
           duration: 250
           easing.type: Easing.InOutCubic
