@@ -27,6 +27,7 @@ Scope {
     Connections {
       target: Hyprland
       function onRawEvent(event) {
+        console.log("raw", event.name, Date.now())
         if (event.name === "openwindow" || event.name === "closewindow"
         || event.name === "changefloatingmode" || event.name === "movewindow") {
           Hyprland.refreshToplevels()
@@ -61,14 +62,18 @@ Scope {
        return ws.toplevels.values.some(w => !w.lastIpcObject?.floating)
      }
 
+     onHasTiledWindowChanged: console.log("hasTiled", hasTiledWindow, Date.now())
+
      ShaderEffect {
        id: shader
        anchors.fill: parent
-       enabled: false
        fragmentShader: Qt.resolvedUrl("../assets/shaders/border.frag.qsb")
 
+
+       visible: !borderWindow.hasTiledWindow
+
        property real thickness: borderWindow.width / 2
-       property real innerRadius: borderWindow.height / 2 // 12
+       property real innerRadius: borderWindow.height / 2
        property real w: width
        property real h: height
        property color borderColor: Theme.background
@@ -89,18 +94,29 @@ Scope {
        }
 
        transitions: Transition {
+         from: ""
+         to: "open"
+
          NumberAnimation {
            property: "thickness"
-           duration: 250
+           duration: 500
            easing.type: Easing.InOutCubic
          }
 
          NumberAnimation {
            property: "innerRadius"
-           duration: 500
+           duration: 1000
            easing.type: Easing.InOutCubic
          }
        }
+     }
+
+     Rectangle {
+
+       anchors.fill: parent
+       color: Theme.background
+
+       visible: borderWindow.hasTiledWindow
      }
 
      CRTFilter {}
@@ -146,4 +162,3 @@ Scope {
       mask: Region {}
     }*/
   }
-

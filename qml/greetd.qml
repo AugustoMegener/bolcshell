@@ -15,6 +15,8 @@ import "./Theme/"
 
 ShellRoot {
 
+
+
   Component.onCompleted: {
 
     if (Greetd.state == GreetdState.Inactive && ShellState.cache.lastGreeterUser && ShellState.cache.lastGreeterSession) {
@@ -147,6 +149,18 @@ ShellRoot {
 
       opacity: 0
 
+      onSubmit: {
+
+        if (Greetd.state == GreetdState.Authenticating)  {
+
+          parent.color = "black"
+          timestamp.anchors.topMargin = -timestamp.anchors.height
+          loginWindow.width = 100
+          loginWindow.opacity = 0
+          card.anchors.bottomMargin = -card.height
+        }
+      }
+
       Behavior on width {
         NumberAnimation {
           duration: 350
@@ -207,11 +221,6 @@ ShellRoot {
       target: Greetd
 
       function onLaunched() {
-        parent.color = "black"
-        timestamp.anchors.topMargin = -timestamp.anchors.height
-        loginWindow.width = 100
-        loginWindow.opacity = 0
-        card.anchors.bottomMargin = -card.height
       }
     }
   }

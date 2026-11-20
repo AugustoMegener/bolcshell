@@ -17,6 +17,8 @@ Column {
   id: root
 
 
+  signal submit() 
+
   Rectangle {
     width: parent.width
     height: content.implicitHeight
@@ -200,6 +202,7 @@ Column {
           anchors.margins: 30
 
           onClicked: {
+            root.submit()
             if (Greetd.state == GreetdState.Inactive) loginUserPage.submit()
             if (Greetd.state == GreetdState.Authenticating) loginAuthPage.submit()
           }
